@@ -1,0 +1,8 @@
+{
+  "name": "debianime-bot",
+  "packageManager": "yarn@3.3.0",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  },
+  "type": "module"
+}
