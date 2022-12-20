@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import { config } from "./config/config.js";
-import { onReady } from "./events/ready.js";
+import { ready } from "./events/ready.js";
 
 const client = new Client({
 	intents: [GatewayIntentBits.Guilds,
@@ -13,5 +13,5 @@ const client = new Client({
   },	 
 });
 
-onReady(client);
+ready(client);
 client.login(config.bot.TOKEN)
