@@ -1,17 +1,6 @@
-import { Client, GatewayIntentBits } from "discord.js";
-import { config } from "./config/config.js";
-import { ready } from "./events/ready.js";
+import DebiAnime from "./structures/DebiAnime.js";
+import config from "./configs/config.js";
 
-const client = new Client({
-	intents: [GatewayIntentBits.Guilds,
-	          GatewayIntentBits.GuildMembers,
-	          GatewayIntentBits.GuildMessages,
-	          GatewayIntentBits.MessageContent],
-  presence: {
-  	activities: [{ name: "building..", type: 0 }],
-  	status: "online"
-  },	 
-});
+const debiAnime = new DebiAnime(config);
 
-ready(client);
-client.login(config.bot.TOKEN)
+debiAnime.start();
