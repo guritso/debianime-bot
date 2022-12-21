@@ -1,19 +1,9 @@
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client } from "discord.js";
+import { clientOptions } from "./clientOptions.js";
 
 export default class DebiAnime extends Client {
   constructor(options = {}) {
-    super({
-      intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMembers,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-      ],
-      presence: {
-        activities: [{ name: "building..", type: 0 }],
-        status: "online",
-      },
-    });
+    super(clientOptions);
     this.loader(options);
   }
   loader(options) {
