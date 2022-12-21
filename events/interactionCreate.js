@@ -1,7 +1,10 @@
-export const InteractionCreate = (client) => {
-	client.on("interactionCreate", (inter) => {
-		if (!inter.isChatInputCommand) return;
-		const command = inter.commandName;
-		import `../commands/${command}.js`
-	})
+export default class {
+  constructor(client) {
+    this.client = client;
+  }
+  async execute(interaction) {
+    const client = this.client;
+    const commandName = interaction.commandName;
+    console.log(commandName);
+  }
 }
