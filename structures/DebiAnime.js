@@ -13,7 +13,7 @@ export default class DebiAnime extends Client {
   }
 
   async start() {
-    await new Events(this).load();
+    await new Events(this).execute();
     await super.login();
   }
 }
