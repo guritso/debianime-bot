@@ -5,12 +5,12 @@ export default class Events {
     this.client = client;
   }
   async execute() {
-    const eventFile = readdirSync("events");
+    const eventFile = readdirSync("Events");
     const client = this.client;
-    
+
     eventFile.forEach(async (file) => {
       const eventName = file.replace(".js", "");
-      const event = new (await import(`../events/${file}`)).default(client);
+      const event = new (await import(`../Events/${file}`)).default(client);
 
       client.on(eventName, (...args) => {
         event.execute(...args);

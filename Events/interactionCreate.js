@@ -5,6 +5,6 @@ export default class {
   async execute(interaction) {
     const client = this.client;
     const commandName = interaction.commandName;
-    console.log(commandName);
+    
   }
 }

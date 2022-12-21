@@ -1,5 +1,5 @@
-import DebiAnime from "./structures/DebiAnime.js";
-import config from "./configs/config.js";
+import DebiAnime from "./Structures/DebiAnime.js";
+import config from "./Configs/config.js";
 
 const debiAnime = new DebiAnime(config);
 
