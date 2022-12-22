@@ -1,13 +1,14 @@
 {
   "name": "debianime-bot",
   "description": "A bot for the DebiAnime discord server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "packageManager": "yarn@3.3.0",
   "dependencies": {
     "discord.js": "^14.7.1"
   },
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
