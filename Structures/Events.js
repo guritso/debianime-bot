@@ -4,7 +4,8 @@ export default class Events {
   constructor(client) {
     this.client = client;
   }
-  async execute() {
+  async execute(logs) {
+    logs.start(Events.name);
     const eventFile = readdirSync("Events");
     const client = this.client;
 
@@ -16,5 +17,6 @@ export default class Events {
         event.execute(...args);
       });
     });
+    logs.end();
   }
 }

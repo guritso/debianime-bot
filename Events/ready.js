@@ -3,6 +3,6 @@ export default class {
     this.client = client;
   }
   async execute() {
-    console.log(`${this.client.user.tag} online ●`);
+    console.log(`\n${this.client.user.tag} online ●`);
   }
 }
