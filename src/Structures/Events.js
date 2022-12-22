@@ -1,4 +1,4 @@
-import { readdirSync } from "fs";
+import { readdirSync } from "node:fs";
 
 export default class Events {
   constructor(client) {
@@ -6,7 +6,7 @@ export default class Events {
   }
   async execute(logs) {
     logs.start(Events.name);
-    const eventFile = readdirSync("Events");
+    const eventFile = readdirSync("src/Events");
     const client = this.client;
 
     eventFile.forEach(async (file) => {

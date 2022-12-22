@@ -6,10 +6,10 @@ export default class Slash {
   }
   async execute(logs) {
     logs.start(Slash.name);
-    const folders = readdirSync("Commands");
+    const folders = readdirSync("src/Commands");
 
     folders.forEach((dir) => {
-      const commands = readdirSync(`Commands/${dir}`)
+      const commands = readdirSync(`src/Commands/${dir}`)
         .filter((name) => name.endsWith(".js"))
         .forEach(async (cmd) => {
           const Load = await import(`../Commands/${dir}/${cmd}`);
