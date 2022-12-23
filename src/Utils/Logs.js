@@ -1,29 +1,47 @@
+import { readdirSync } from "node:fs";
+
 export default class Logs {
   constructor() {
-    this.name = null;
-    this.send = true;
-  }
-  start(name) {
-    this.name = name;
-    verify(this.send);
-
-    if (!this.name) return;
-
-    process.stdin.write(`↺loading ${name}`);
-    this.send = false;
-
-    function error() {
-      console.log(` ✗ error.`);
-    }
-
-    function verify(send) {
-      if (!send) {
-        error();
+    this.print = (txt, inline) => {
+      if (inline) {
+        process.stdin.write(txt);
+      } else {
+        console.log(txt);
       }
+    };
+    this.files = readdirSync("src/Structures");
+    this.check = new Map();
+  }
+  execute() {
+    for (let iten of this.files) {
+      iten = iten.split(".")[0];
+      this.check.set(iten, false);
     }
   }
-  end() {
-    console.log(` ✓ done.`);
-    this.send = true;
+  async init(name) {
+    this.name = name;
+    this.print(`↺ loading ${name}`, true);
+    let stop = 0;
+    await new Promise(() => {
+      const wait = setInterval(() => {
+        if (this.check.get(name) == true) {
+          this.print(` ✓ done.`);
+          clearInterval(wait);
+        }
+        stop++;
+        if (stop == 3000) {
+          clearInterval(wait);
+          this.print(" ✘ error.");
+        }
+      });
+    });
+  }
+  async end() {
+    this.check.set(this.name, true);
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 1000);
+    });
   }
 }
