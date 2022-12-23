@@ -6,7 +6,13 @@ export default class {
     const client = this.client;
     const commandName = interaction.commandName;
     const command = client.commands.get(commandName);
-    
-    command.execute(interaction, client);
+
+    if (!command) return;
+
+    try {
+      command.execute(interaction, client);
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
