@@ -18,7 +18,7 @@
   "keywords": [
     "discord",
     "discord.js",
-    "es6",
+    "ES6",
     "v14"
   ],
   "author": "GuriZenit",
@@ -29,6 +29,3 @@
   "homepage": "https://github.com/GuriZenit/debianime-bot#readme",
   "type": "module"
 }
-
-
-
