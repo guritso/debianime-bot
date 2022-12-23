@@ -1,22 +1,16 @@
 import { clientOptions } from "../Configs/clientOptions.js";
 import { Client, Collection } from "discord.js";
-import Handler from "./Handler.js";
-import Events from "./Events.js";
-import Slashes from "./Slashes.js";
+import Loader from "../Utils/Loader.js";
 
 export default class DebiAnime extends Client {
   constructor(options = {}) {
     super(clientOptions);
-
     this.commands = new Collection();
-    this.loader(options);
-
-    this.slashes = new Slashes(this);
-    this.handler = new Handler(this);
-    this.events = new Events(this);
+    this.validate(options);
+    this.loader = new Loader(this);
   }
 
-  loader(options) {
+  validate(options) {
     this.token = options.bot.TOKEN;
     this.guild = options.guild;
     this.bot = options.bot;
@@ -24,9 +18,7 @@ export default class DebiAnime extends Client {
   }
 
   async start() {
-    await this.slashes.execute();
-    await this.handler.execute();
-    await this.events.execute();
+    await this.loader.execute();
     await this.login();
   }
 }
