@@ -6,8 +6,7 @@ export default class Handler {
     this.botID = client.bot.ID;
     this.botTOKEN = client.bot.TOKEN;
   }
-  async execute(logs) {
-    logs.init(Handler.name);
+  async execute() {
     const rest = new REST({ version: "10" }).setToken(this.botTOKEN);
     const slashComands = [];
 
@@ -15,12 +14,10 @@ export default class Handler {
       slashComands.push(cmd.data);
     });
 
-    if (slashComands.length){
-    await rest.put(Routes.applicationCommands(this.botID), {
-      body: slashComands,
-    });
+    if (slashComands.length) {
+      await rest.put(Routes.applicationCommands(this.botID), {
+        body: slashComands,
+      });
     }
-
-    await logs.end();
   }
 }

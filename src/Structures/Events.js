@@ -4,8 +4,7 @@ export default class Events {
   constructor(client) {
     this.client = client;
   }
-  async execute(logs) {
-    logs.init(Events.name, true);
+  async execute() {
     const PATH = process.cwd() + "/src/Events";
     const eventFile = readdirSync(PATH);
     const client = this.client;
@@ -19,6 +18,5 @@ export default class Events {
         event.execute(...args);
       });
     });
-    await logs.end();
   }
 }

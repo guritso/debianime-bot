@@ -4,12 +4,10 @@ export default class Slashes {
   constructor(client) {
     this.commands = client.commands;
   }
-  async execute(logs) {
-    logs.init(Slashes.name);
-
+  async execute() {
     const PATH = process.cwd() + "/src/Commands/Slash";
     const folders = readdirSync(PATH);
-
+    // wait to save the commands in
     await new Promise((resolve) => {
       folders.forEach((dir) => {
         const commandFiles = readdirSync(`${PATH}/${dir}`).filter((nome) =>
@@ -27,6 +25,5 @@ export default class Slashes {
         });
       });
     });
-    await logs.end();
   }
 }
