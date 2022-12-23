@@ -7,7 +7,7 @@ export default class Slashes {
   async execute(logs) {
     logs.init(Slashes.name);
 
-    const PATH = process.cwd() + "/src/Commands";
+    const PATH = process.cwd() + "/src/Commands/Slash";
     const folders = readdirSync(PATH);
 
     await new Promise((resolve) => {
