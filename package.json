@@ -5,7 +5,8 @@
   "main": "index.js",
   "packageManager": "yarn@3.3.0",
   "dependencies": {
-    "discord.js": "^14.7.1"
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3"
   },
   "scripts": {
     "start": "node index.js",

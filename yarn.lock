@@ -110,6 +110,7 @@ __metadata:
   resolution: "debianime-bot@workspace:."
   dependencies:
     discord.js: ^14.7.1
+    dotenv: ^16.0.3
   languageName: unknown
   linkType: soft
 
@@ -137,6 +138,13 @@ __metadata:
     undici: ^5.13.0
     ws: ^8.11.0
   checksum: fa861275b1f5360ef1b06cd514014ebd4e3f384655834dd1f73fd9f715bee643500f9d837c52f496d306825bc9c3d6c94e67463d91326e3750a28db765926ad6
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^16.0.3":
+  version: 16.0.3
+  resolution: "dotenv@npm:16.0.3"
+  checksum: afcf03f373d7a6d62c7e9afea6328e62851d627a4e73f2e12d0a8deae1cd375892004f3021883f8aec85932cd2834b091f568ced92b4774625b321db83b827f8
   languageName: node
   linkType: hard
 
