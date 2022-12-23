@@ -3,15 +3,20 @@ import { Client, Collection } from "discord.js";
 import Logs from "../Utils/Logs.js";
 import Handler from "./Handler.js";
 import Events from "./Events.js";
-import Slash from "./Slash.js";
+import Slashes from "./Slashes.js";
 
 export default class DebiAnime extends Client {
   constructor(options = {}) {
     super(clientOptions);
 
     this.commands = new Collection();
-    this.logs = new Logs();
     this.loader(options);
+
+    this.slashes = new Slashes(this);
+    this.handler = new Handler(this);
+    this.events = new Events(this);
+
+    this.logs = new Logs();
   }
 
   loader(options) {
@@ -21,10 +26,11 @@ export default class DebiAnime extends Client {
   }
 
   async start() {
-    await new Events(this).execute(this.logs);
-    await new Slash(this).execute(this.logs);
-    await new Handler(this).execute(this.logs);
-    await super.login();
-    await this.logs.start();
+    await this.logs.execute();
+
+    await this.slashes.execute(this.logs);
+    await this.handler.execute(this.logs);
+    await this.events.execute(this.logs);
+    await this.login();
   }
 }
