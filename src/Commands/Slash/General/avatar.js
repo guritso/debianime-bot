@@ -1,7 +1,7 @@
 export default class {
   constructor() {
     this.data = {
-      types: [1, 2],
+      type: 1,
       name: "avatar",
       description: "send your and others avatar",
       options: [
