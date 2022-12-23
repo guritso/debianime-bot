@@ -1,4 +1,6 @@
 import "dotenv/config";
+import colors from "./colors.js";
+
 export default {
   bot: {
     ID: "1054588440143986788",
@@ -7,4 +9,5 @@ export default {
   guild: {
     ID: "794717836827688981",
   },
+  color: colors
 };
