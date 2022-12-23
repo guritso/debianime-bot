@@ -16,5 +16,9 @@ export default class {
   async execute(interaction) {
     const message = interaction.options.getString("message");
     interaction.channel.send(message);
+    interaction.reply({
+      content:"√",
+      ephemeral: true
+    })
   }
 }
