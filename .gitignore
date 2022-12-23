@@ -115,3 +115,4 @@ dist
 # Others
 .editorconfig
 .discloudignore
+discloud.config
