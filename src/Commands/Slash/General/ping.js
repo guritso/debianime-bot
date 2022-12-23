@@ -1,6 +1,7 @@
 export default class {
   constructor() {
     this.data = {
+      type: 1,
       name: "ping",
       description: "send the ping",
     };
