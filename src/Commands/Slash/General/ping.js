@@ -15,7 +15,7 @@ export default class {
         { name: "BOT:", value: `${bot}ms`, inline: true },
         { name: "API:", value: `${api}ms`, inline: true },
       ],
-      color: 0xff0044,
+      color: client.color.int.primary,
     };
 
     interaction.reply({
