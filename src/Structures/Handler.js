@@ -7,19 +7,20 @@ export default class Handler {
     this.botTOKEN = client.bot.TOKEN;
   }
   async execute(logs) {
-    logs.start(Handler.name);
+    logs.init(Handler.name);
     const rest = new REST({ version: "10" }).setToken(this.botTOKEN);
     const slashComands = [];
 
-    this.commands.forEach(async (cmd) => {
+    this.commands.forEach((cmd) => {
       slashComands.push(cmd.data);
     });
-    if (!slashComands.length) return;
+
+    if (slashComands.length){
     await rest.put(Routes.applicationCommands(this.botID), {
       body: slashComands,
     });
+    }
 
-    logs.end();
-    console.log(slashComands);
+    await logs.end();
   }
 }
