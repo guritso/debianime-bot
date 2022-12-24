@@ -2,22 +2,25 @@ import { Routes, REST } from "discord.js";
 
 export default class Handler {
   constructor(client) {
-    this.commands = client.commands;
+    this.interCommands = client.interactionCommands;
     this.botID = client.bot.ID;
     this.botTOKEN = client.bot.TOKEN;
   }
   async execute() {
-    const rest = new REST({ version: "10" }).setToken(this.botTOKEN);
-    const slashComands = [];
+    const rest = new REST({ version: "10" });
+    rest.setToken(this.botTOKEN);
 
-    this.commands.forEach((cmd) => {
-      slashComands.push(cmd.data);
+    const interCommandsArray = [];
+
+    await this.interCommands.forEach((cmd) => {
+      interCommandsArray.push(cmd.data);
     });
+    
+    
+    if (!interCommandsArray.length) return;
 
-    if (slashComands.length) {
-      await rest.put(Routes.applicationCommands(this.botID), {
-        body: slashComands,
-      });
-    }
+    await rest.put(Routes.applicationCommands(this.botID), {
+      body: interCommandsArray,
+    });
   }
 }
