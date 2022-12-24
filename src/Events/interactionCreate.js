@@ -4,8 +4,9 @@ export default class {
   }
   async execute(interaction) {
     const client = this.client;
+    const interCommands = client.interactionCommands;
     const commandName = interaction.commandName;
-    const command = client.commands.get(commandName);
+    const command = interCommands.get(commandName);
 
     if (!command) return;
 
