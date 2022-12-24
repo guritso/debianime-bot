@@ -5,7 +5,9 @@ import Loader from "../Utils/Loader.js";
 export default class DebiAnime extends Client {
   constructor(options = {}) {
     super(clientOptions);
-    this.commands = new Collection();
+    this.interactionCommands = new Collection();
+    this.messageCommands = new Collection();
+    
     this.validate(options);
     this.loader = new Loader(this);
   }
