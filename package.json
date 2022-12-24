@@ -1,7 +1,7 @@
 {
   "name": "debianime-bot",
   "description": "A bot for the DebiAnime discord server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
   "packageManager": "yarn@3.3.0",
   "dependencies": {
