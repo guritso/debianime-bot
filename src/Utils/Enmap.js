@@ -6,7 +6,7 @@ export default class Enmap {
     this.folders = readdirSync(this.PATH);
     this.count = 0;
   }
-  execute = async (map) => {
+  async execute (map) {
     await new Promise((resolve) => {
       const PATH = this.PATH;
 
