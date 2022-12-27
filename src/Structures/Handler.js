@@ -4,6 +4,7 @@ export default class Handler {
   constructor(client) {
     this.interCommands = client.interactionCommands;
     this.botID = client.bot.ID;
+    this.guildID = client.guild.ID;
     this.botTOKEN = client.bot.TOKEN;
   }
   async execute() {
@@ -15,11 +16,10 @@ export default class Handler {
     await this.interCommands.forEach((cmd) => {
       interCommandsArray.push(cmd.data);
     });
-    
-    
+
     if (!interCommandsArray.length) return;
 
-    await rest.put(Routes.applicationCommands(this.botID), {
+    await rest.put(Routes.applicationGuildCommands(this.botID, this.guildID), {
       body: interCommandsArray,
     });
   }
