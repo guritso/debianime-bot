@@ -7,13 +7,12 @@ export default class DebiAnime extends Client {
     super(clientOptions);
     this.interactionCommands = new Collection();
     this.messageCommands = new Collection();
-    
+
     this.validate(options);
     this.loader = new Loader(this);
   }
 
   validate(options) {
-    this.token = options.bot.TOKEN;
     this.guild = options.guild;
     this.bot = options.bot;
     this.color = options.color;
@@ -21,6 +20,6 @@ export default class DebiAnime extends Client {
 
   async start() {
     await this.loader.execute();
-    await this.login();
+    await this.login(this.bot.TOKEN);
   }
 }
