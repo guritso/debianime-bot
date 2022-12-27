@@ -6,18 +6,20 @@ export default class {
     };
   }
   async execute(interaction, client) {
-    const user = interaction.options.getUser("user");
-    const author = interaction.user;
+    const user = interaction.options.getMember("user");
+    const author = interaction.member;
+    
+    const MSG = "Requested by"
 
     const embed = {
-      title: user.tag,
+      title: user.nickname || user.user.username,
       color: client.color.int.primary,
       image: {
-        url: user.avatarURL({ size: 2048 }),
+        url: user.displayAvatarURL({ size: 2048 }),
       },
       footer: {
-        text: `Requested by ${author.tag}`,
-        icon_url: author.avatarURL(),
+        text: `${MSG} ${author.nickname || author.user.username}`,
+        icon_url: author.displayAvatarURL(),
       },
     };
 
