@@ -6,16 +6,24 @@ export default class Events {
   }
   async execute() {
     const PATH = process.cwd() + "/src/Events";
-    const eventFile = readdirSync(PATH);
+    const eventFiles = readdirSync(PATH);
     const client = this.client;
 
-    eventFile.forEach(async (file) => {
-      const eventName = file.replace(".js", "");
-      const Event = await import(`${PATH}/${file}`);
-      const event = new Event.default(client);
+    let count = 0;
 
-      client.on(eventName, (...args) => {
-        event.execute(...args);
+    await new Promise((resolve) => {
+      eventFiles.forEach(async (file) => {
+        const eventName = file.replace(".js", "");
+        const Event = await import(`${PATH}/${file}`);
+        const event = new Event.default(client);
+
+        client.on(eventName, (...args) => {
+          event.execute(...args);
+        });
+
+        console.log(` • ${eventName}`);
+        count = count + 1;
+        if (eventFiles.length == count) resolve();
       });
     });
   }
