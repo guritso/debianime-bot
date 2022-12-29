@@ -10,8 +10,8 @@ export default class {
     this.handler = new Handler(client);
     this.events = new Events(client);
 
-    this.print = (msg) => {
-      console.log(msg);
+    this.print = (...args) => {
+      console.log(...args);
     };
   }
   async execute() {
@@ -23,6 +23,6 @@ export default class {
     await this.handler.execute();
     this.print("↺ loading Events.........|4/5|");
     await this.events.execute();
-    this.print("◐ Starting Client........|5/5|");
+    this.print("↺ loading Client.........|5/5|");
   }
 }
