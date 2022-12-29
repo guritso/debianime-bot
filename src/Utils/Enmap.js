@@ -22,7 +22,7 @@ export default class Enmap {
 
           map.set(load.data.name, load);
 
-          console.log(`• ${load.data.name}`);
+          console.log(` • ${load.data.name}`);
 
           count = count + 1;
           if (count == length) {
