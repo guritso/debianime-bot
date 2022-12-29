@@ -19,8 +19,18 @@ export default class Handler {
 
     if (!interCommandsArray.length) return;
 
-    await rest.put(Routes.applicationGuildCommands(this.botID, this.guildID), {
-      body: interCommandsArray,
-    });
+    for (let item of interCommandsArray) {
+    }
+
+    const array = await rest.put(
+      Routes.applicationGuildCommands(this.botID, this.guildID),
+      {
+        body: interCommandsArray,
+      }
+    );
+
+    for (let item of array) {
+      console.log(` • ${item.id}:${item.name}`);
+    }
   }
 }
