@@ -19,7 +19,7 @@ export default class {
       permissions: ["ReadMessageHistory", "ManageMessages", "ViewChannel"],
     };
     this.strings = {
-      invalid: "> Invalid ammount! `0 < ammount < 100`",
+      invalid: "> Invalid ammount! `1 < ammount < 100`",
       deleted: "messages deleted!",
     };
   }
@@ -28,7 +28,7 @@ export default class {
     const { invalid, missing, deleted } = this.strings;
     const ammount = interaction.options.getInteger("ammount");
 
-    if (1 > ammount || ammount > 100) {
+    if (2 > ammount || ammount > 100) {
       return interaction.editReply(invalid);
     }
 
