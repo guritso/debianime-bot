@@ -7,9 +7,9 @@ export default class {
   async execute(interaction) {
     const client = this.client;
 
-    const Commands = client.interactionCommands;
     const commandName = interaction.commandName;
-    const command = Commands.get(commandName);
+    const commands = client.interactionCommands;
+    const command = commands.get(commandName);
    
     const permission = new Permission()
       .setNeed(command.data.permissions)
