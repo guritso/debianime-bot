@@ -1,7 +1,7 @@
 export default class Permission {
   constructor() {
     this.data = {
-      memberID: null,
+      memberId: null,
       channel: null,
       needed: null,
     };
@@ -27,8 +27,8 @@ export default class Permission {
     this.data.needed = newNeeded;
     return this;
   }
-  setChannel(channel) {
-    this.data.channel = channel;
+  setChannel(newChannel) {
+    this.data.channel = newChannel;
     return this;
   }
 }
