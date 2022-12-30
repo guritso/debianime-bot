@@ -16,20 +16,18 @@ export default class {
       .setChannel(interaction.channel)
       .setId(client.user.id);
     const missing = await permission.check();
-    
+  
     if (missing) {
+      const embed = {
+        title: "Missing Permissions",
+        description: missing.join("\n"),
+        color: client.color.int.red,
+      }
       return interaction.reply({
-        embeds: [
-          {
-            title: "Missing Permissions",
-            description: missing.join("\n"),
-            color: client.color.int.red,
-          },
-        ],
+        embeds: [embed],
+        ephemeral: true,
       });
     }
-
-    if (!command) return;
 
     try {
       command.execute(interaction, client);
