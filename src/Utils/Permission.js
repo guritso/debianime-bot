@@ -1,42 +1,34 @@
 export default class Permission {
   constructor() {
     this.data = {
+      memberID: null,
       channel: null,
-      need: null,
-      have: null,
-      id: null,
+      needed: null,
     };
-    this.missing = [];
   }
   async check() {
-    const { channel, need, id } = this.data;
+    const { channel, needed, memberId } = this.data;
+    if (!channel || !needed || !memberId) return;
+    const permissions = channel.permissionsFor(memberId);
+    const missingPermissions = [];
 
-    if (!channel || !need || !id) return;
-
-    this.have = channel.permissionsFor(id);
-
-    need.forEach((permission) => {
-      if (!this.have.has(permission)) {
-        this.missing.push(permission);
+    needed.forEach((name) => {
+      if (!permissions.has(name)) {
+        missingPermissions.push(name);
       }
     });
-
-    if (this.missing.length) {
-      return this.missing;
-    } else {
-      return false;
-    }
+    return missingPermissions;
   }
-  setNeed(need) {
-    this.data.need = need;
+  setMemberId(newMemberId) {
+    this.data.memberId = newMemberId;
+    return this;
+  }
+  setNeeded(newNeeded) {
+    this.data.needed = newNeeded;
     return this;
   }
   setChannel(channel) {
     this.data.channel = channel;
-    return this;
-  }
-  setId(id) {
-    this.data.id = id;
     return this;
   }
 }
