@@ -8,29 +8,19 @@ export default class Handler {
     this.botTOKEN = client.bot.TOKEN;
   }
   async execute() {
-    const rest = new REST({ version: "10" });
-    rest.setToken(this.botTOKEN);
-
-    const interCommandsArray = [];
+    const rest = new REST({ version: "10" }).setToken(this.botTOKEN);
+    const interCommandsArray = new Array();
 
     await this.interCommands.forEach((cmd) => {
       interCommandsArray.push(cmd.data);
     });
+    const length = interCommandsArray.length;
 
-    if (!interCommandsArray.length) return;
+    if (!length) return;
 
-    for (let item of interCommandsArray) {
-    }
-
-    const array = await rest.put(
-      Routes.applicationGuildCommands(this.botID, this.guildID),
-      {
-        body: interCommandsArray,
-      }
-    );
-
-    for (let item of array) {
-      console.log(` • ${item.id}:${item.name}`);
-    }
+    await rest.put(Routes.applicationGuildCommands(this.botID, this.guildID), {
+      body: interCommandsArray,
+    });
+    console.log(` • Registered ${length} commands`);
   }
 }
