@@ -8,7 +8,7 @@ export default class Permission {
   }
   async check() {
     const { channel, needed, memberId } = this.data;
-    if (!channel || !needed || !memberId) return;
+    if (!channel || !needed || !memberId) return [];
     const permissions = channel.permissionsFor(memberId);
     const missingPermissions = [];
 
