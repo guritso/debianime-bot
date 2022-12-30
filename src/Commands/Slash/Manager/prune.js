@@ -1,3 +1,5 @@
+import Permission from "../../../Utils/Permission.js";
+
 export default class {
   constructor() {
     this.data = {
@@ -14,33 +16,26 @@ export default class {
           type: 4,
         },
       ],
+      permissions: ["ReadMessageHistory", "ManageMessages", "ViewChannel"],
     };
     this.strings = {
       invalid: "> Invalid ammount! `0 < ammount < 100`",
-      missing: "> The following permission is missing:`",
       deleted: "messages deleted!",
     };
-    this.permissions = ["ReadMessageHistory", "ManageMessages", "ViewChannel"];
   }
-  async execute(interaction) {
-    const { invalid, missing, deleted } = this.strings;
-
+  async execute(interaction, client) {
     await interaction.deferReply({ ephemeral: true });
+    const { invalid, missing, deleted } = this.strings;
     const ammount = interaction.options.getInteger("ammount");
-    const botPerm = interaction.appPermissions.toArray();
 
     if (1 > ammount || ammount > 100) {
       return interaction.editReply(invalid);
     }
 
-    for (let i in this.permissions) {
-      if (!botPerm.includes(this.permissions[i])) {
-        const message = missing.concat(this.permissions[i] + "`");
-        return interaction.editReply(message);
-      }
-    }
+    const messages = await interaction.channel.bulkDelete(ammount);
 
-    await interaction.channel.bulkDelete(ammount);
-    interaction.editReply(`> **${ammount}** ${deleted}`);
+    interaction.editReply({
+      content: `> **${messages.size}** ${deleted}`,
+    });
   }
 }
