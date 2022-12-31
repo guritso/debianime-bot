@@ -15,9 +15,9 @@ export default class {
       .setNeeded(command.data.permissions)
       .setChannel(interaction.channel)
       .setMemberId(client.user.id);
-    const missing = await permission.check();
-
-    if (missing.length) {
+    const missing = await permission.getMissing();
+    
+    if (missing) {
       const embed = {
         title: "Missing Permissions",
         description: missing.join("\n"),
