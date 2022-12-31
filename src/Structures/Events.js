@@ -15,11 +15,17 @@ export default class Events {
       eventFiles.forEach(async (file) => {
         const eventName = file.replace(".js", "");
         const Event = await import(`${PATH}/${file}`);
-        const event = new Event.default(client);
+        const event = new Event.default();
 
-        client.on(eventName, (...args) => {
-          event.execute(...args);
-        });
+        if (event.once) {
+          client.once(eventName, (...args) => {
+            event.execute(...args);
+          });
+        } else {
+          client.on(eventName, (...args) => {
+            event.execute(...args);
+          });
+        }
 
         console.log(` • ${eventName}`);
         count = count + 1;

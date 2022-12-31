@@ -1,8 +1,8 @@
 export default class {
-  constructor(client) {
-    this.client = client;
+  constructor() {
+    this.once = true;
   }
-  async execute() {
-    console.log(` • ${this.client.user.tag} online!`);
+  async execute(client) {
+    console.log(` • ${client.user.tag} online!`);
   }
 }

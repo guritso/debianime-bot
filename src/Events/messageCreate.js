@@ -1,16 +1,20 @@
 export default class {
-  constructor(client) {
-    this.client = client;
+  constructor() {
+    this.once = false;
   }
   async execute(message) {
     if (message.author.bot) return;
-    const client = this.client
+
+    const client = message.client;
+    const prefix = client.bot.prefix;
     const args = message.content;
-    const msgCommands = this.client.messageCommands;
-    const commandName = args.split(" ").shift().slice(client.bot.prefix.length);
-    console.log(commandName)
+
+    if (!args.startsWith(prefix)) return;
+
+    const msgCommands = client.messageCommands;
+    const commandName = args.split(" ").shift().slice(prefix.length);
+
     const command = msgCommands.get(commandName);
-    console.log(command)
 
     try {
       command.execute(message, args, client);

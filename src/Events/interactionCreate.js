@@ -1,11 +1,11 @@
 import Permission from "../Utils/Permission.js";
 
 export default class {
-  constructor(client) {
-    this.client = client;
-  }
+    constructor() {
+      this.once = false;
+    }
   async execute(interaction) {
-    const client = this.client;
+    const client = interaction.client;
 
     const commandName = interaction.commandName;
     const commands = client.interactionCommands;
@@ -16,7 +16,7 @@ export default class {
       .setChannel(interaction.channel)
       .setMemberId(client.user.id);
     const missing = await permission.getMissing();
-    
+
     if (missing) {
       const embed = {
         title: "Missing Permissions",
