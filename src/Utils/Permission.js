@@ -7,6 +7,7 @@ export default class Permission {
   }
   async getMissing() {
     const { memberId, channel, needed } = this;
+    if ((!memberId | !channel |!needed)) return;
     const permissions = channel.permissionsFor(memberId);
 
     needed.forEach((name) => {
