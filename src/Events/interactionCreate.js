@@ -1,9 +1,9 @@
 import Permission from "../Utils/Permission.js";
 
 export default class {
-    constructor() {
-      this.once = false;
-    }
+  constructor() {
+    this.once = false;
+  }
   async execute(interaction) {
     const client = interaction.client;
 
