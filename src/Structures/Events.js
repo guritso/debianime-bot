@@ -9,10 +9,8 @@ export default class Events {
     const eventFiles = readdirSync(PATH);
     const client = this.client;
 
-    let count = 0;
-
     await new Promise((resolve) => {
-      eventFiles.forEach(async (file) => {
+      eventFiles.forEach(async (file, index) => {
         const eventName = file.replace(".js", "");
         const Event = await import(`${PATH}/${file}`);
         const event = new Event.default();
@@ -28,8 +26,7 @@ export default class Events {
         }
 
         console.log(` • ${eventName}`);
-        count = count + 1;
-        if (eventFiles.length == count) resolve();
+        if (eventFiles.length == index + 1) resolve();
       });
     });
   }

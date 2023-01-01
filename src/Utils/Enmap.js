@@ -13,19 +13,15 @@ export default class Enmap {
         const files = readdirSync(`${PATH}/${dir}`).filter((name) =>
           name.endsWith(".js")
         );
-        const length = files.length;
-        let count = 0;
 
-        files.forEach(async (cmd) => {
+        files.forEach(async (cmd, index) => {
           const Load = await import(`${PATH}/${dir}/${cmd}`);
           const load = await new Load.default();
 
           map.set(load.data.name, load);
-
           console.log(` • ${load.data.name}`);
 
-          count = count + 1;
-          if (count == length) {
+          if (files.length == index + 1) {
             resolve();
           }
         });
