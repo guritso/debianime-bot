@@ -7,14 +7,16 @@ export default class {
 
     const client = message.client;
     const prefix = client.bot.prefix;
-    const args = message.content;
 
-    if (!args.startsWith(prefix)) return;
+    if (!message.content.toLowerCase().startsWith(prefix)) return;
 
-    const msgCommands = client.messageCommands;
-    const commandName = args.split(" ").shift().slice(prefix.length);
+    const args = message.content.trim().slice(prefix.length).split(/ +/g);
 
-    const command = msgCommands.get(commandName);
+    const messageCommands = client.messageCommands;
+    const commandName = args.shift().toLowerCase();
+    const command = messageCommands.get(commandName);
+
+    if (!command) return;
 
     try {
       command.execute(message, args, client);
