@@ -21,6 +21,6 @@ export default class Handler {
     await rest.put(Routes.applicationGuildCommands(this.botID, this.guildID), {
       body: interCommandsArray,
     });
-    console.log(` • Registered ${length} commands`);
+    console.log(`  • Registered ${length} commands`);
   }
 }
