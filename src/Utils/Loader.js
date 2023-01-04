@@ -1,12 +1,10 @@
-import Interactions from "../Collections/Interactions.js";
-import Messages from "../Collections/Messages.js";
+import Actions from "../Collections/Actions.js";
 import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
 
 export default class {
   constructor(client) {
-    this.inter = new Interactions(client);
-    this.commands = new Messages(client);
+    this.actions = new Actions(client);
     this.handler = new Handler(client);
     this.events = new Events(client);
 
@@ -15,14 +13,12 @@ export default class {
     };
   }
   async execute() {
-    this.print("↺ loading Interactions...|1/5|");
-    await this.inter.execute();
-    this.print("↺ loading Commands.......|2/5|");
-    await this.commands.execute();
-    this.print("↺ loading Handler........|3/5|");
+    this.print("↺ loading Actions........|1/4|");
+    await this.actions.execute();
+    this.print("↺ loading Handler........|2/4|");
     await this.handler.execute();
-    this.print("↺ loading Events.........|4/5|");
+    this.print("↺ loading Events.........|3/4|");
     await this.events.execute();
-    this.print("↺ loading Client.........|5/5|");
+    this.print("↺ loading Client.........|4/4|");
   }
 }
