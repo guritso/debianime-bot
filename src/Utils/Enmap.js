@@ -2,27 +2,28 @@ import { readdirSync } from "node:fs";
 
 export default class Enmap {
   constructor(path) {
-    this.PATH = process.cwd() + path;
+    this.PATH = path;
     this.folders = readdirSync(this.PATH);
   }
   async execute(map) {
-    await new Promise((resolve) => {
+    return new Promise((resolve) => {
       const PATH = this.PATH;
 
-      this.folders.forEach((dir) => {
+      this.folders.forEach(async (dir, index) => {
         const files = readdirSync(`${PATH}/${dir}`).filter((name) =>
           name.endsWith(".js")
         );
 
-        files.forEach(async (cmd, index) => {
+        for (let cmd of files) {
           const Load = await import(`${PATH}/${dir}/${cmd}`);
           const load = await new Load.default();
 
           map.set(load.data.name, load);
-          console.log(` • ${load.data.name}`);
-
-          if (files.length == index + 1) resolve();
-        });
+          console.log(`  • ${load.data.name}`);
+        }
+        if (this.folders.length == index + 1) {
+          resolve();
+        }
       });
     });
   }
