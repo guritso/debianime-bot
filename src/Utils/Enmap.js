@@ -21,9 +21,7 @@ export default class Enmap {
           map.set(load.data.name, load);
           console.log(`  • ${load.data.name}`);
         }
-        if (this.folders.length == index + 1) {
-          resolve();
-        }
+        if (this.folders.length == index + 1) resolve();
       });
     });
   }

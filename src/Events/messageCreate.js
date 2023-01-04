@@ -16,7 +16,6 @@ export default class {
     const commandName = args.shift().toLowerCase();
     const command = messageCommands.get(commandName);
 
-    console.log(commandName, command);
     if (!command) return;
 
     const { permissionsBot, permissionsUser } = command.data;
