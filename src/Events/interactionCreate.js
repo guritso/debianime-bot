@@ -5,9 +5,7 @@ export default class {
     this.once = false;
   }
   async execute(interaction) {
-    const client = interaction.client;
-
-    const commandName = interaction.commandName;
+    const { client, commandName } = interaction;
     const commands = client.interactionCommands;
     const command = commands.get(commandName);
 
@@ -22,6 +20,7 @@ export default class {
         title: "Missing Permissions",
         description: missing.join("\n"),
         color: client.color.int.red,
+        footer: { text: `For ${client.user.tag}` },
       };
       return interaction.reply({
         embeds: [embed],
