@@ -17,7 +17,7 @@ export default class {
   async execute(interaction, client) {
     const user = interaction.options.getUser("user");
     const author = interaction.user;
-    const member = user ? user : author;
+    const member = user || author;
 
     if (!member) {
       interaction.reply({
