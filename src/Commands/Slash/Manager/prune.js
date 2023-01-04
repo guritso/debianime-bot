@@ -7,7 +7,7 @@ export default class {
       name: "prune",
       description: "Prune up to 100 messages",
       dm_permission: false,
-      default_member_permissions: 1 << 13,
+      default_member_permissions: 1 << 13, // ManageMessages
       options: [
         {
           name: "ammount",
