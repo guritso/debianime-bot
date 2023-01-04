@@ -16,12 +16,20 @@
     "type": "git",
     "url": "git+https://github.com/GuriZenit/debianime-bot.git"
   },
-  "keywords": ["discord", "discord.js", "ES6", "v14"],
+  "keywords": [
+    "discord",
+    "discord.js",
+    "ES6",
+    "v14"
+  ],
   "author": "GuriZenit",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/GuriZenit/debianime-bot/issues"
   },
   "homepage": "https://github.com/GuriZenit/debianime-bot#readme",
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
