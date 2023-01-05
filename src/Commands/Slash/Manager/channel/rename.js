@@ -2,26 +2,23 @@ export default class {
   constructor() {}
   async execute(interaction) {
     const { color } = interaction.client;
-    const channel = interaction.options.getChannel("channel");
+    const giveChannel = interaction.options.getChannel("channel");
+    const newName = interaction.options.getString("new_name");
+    const channel = giveChannel || interaction.channel;
     const oldName = channel.name;
-    const newName = interaction.options.getString("name");
 
-    try {
-      await channel.setName(newName);
-    } catch (err) {
+    if (!channel.manageable)
       return interaction.reply({
-        content: `> I don't have acess to ${oldName}`,
+        content: `> I don't have permission in ${oldName}`,
         ephemeral: true,
       });
-    }
+
+    await channel.setName(newName);
 
     const embed = {
       title: "Channel Renamed",
       color: color.int.primary,
-      fields: [
-        { name: "From", value: oldName },
-        { name: "To", value: newName },
-      ],
+      description: `**OLD:** ${oldName}\n**NEW:** ${newName}`,
     };
 
     interaction.reply({

@@ -12,16 +12,15 @@ export default class {
           type: 1,
           options: [
             {
-              name: "channel",
-              description: "select the channel",
-              required: true,
-              type: 7,
-            },
-            {
-              name: "name",
+              name: "new_name",
               description: "choose a new name",
               required: true,
               type: 3,
+            },
+            {
+              name: "channel",
+              description: "select the channel (optional)",
+              type: 7,
             },
           ],
         },
