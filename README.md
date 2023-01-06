@@ -1,9 +1,10 @@
 # debianime-bot
-A bot for the DebiAnime discord server
 
-## Commamds
+> A bot for the DebiAnime discord server
 
-### Slashes
+## Commands
+
+### Slash
 
 * avatar
 * ping
