@@ -1,6 +1,6 @@
 # debianime-bot
 
-> A bot for the DebiAnime discord server
+> A bot in ES6 for the DebiAnime discord server
 
 ## Commands
 
@@ -21,3 +21,5 @@
 ### Message
 
 * shutdown
+
+> building...
