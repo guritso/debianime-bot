@@ -28,15 +28,15 @@ export default class {
       .setChannel(channel);
     const missingClient = await permission.getMissing();
 
-    let embed = {
+    const embed = {
       title: "Missing Permissions",
       color: client.color.int.red,
+      description: missingClient.join("\n"),
+      footer: { text: `For ${client.user.tag}` },
     };
 
     if (missingClient) {
-      embed.description = missingClient.join("\n");
-      embed.footer = { text: `For ${client.user.tag}` };
-      return message.member.send({ embeds: [embed] });
+      return message.member.send({ embeds: [embed] }).catch(() => {});
     }
 
     permission.setMemberId(author.id).setNeeded(permissionsUser);
@@ -45,7 +45,7 @@ export default class {
     if (missingAuthor) {
       embed.description = missingAuthor.join("\n");
       embed.footer = { text: `For ${author.tag}` };
-      return message.member.send({ embeds: [embed] });
+      return message.member.send({ embeds: [embed] }).catch(() => {});
     }
 
     try {
