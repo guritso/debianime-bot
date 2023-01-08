@@ -14,7 +14,9 @@ export default class {
 
     const args = content.trim().slice(bot.prefix.length).split(/ +/g);
     const commandName = args.shift().toLowerCase();
-    const command = messageCommands.get(commandName);
+    const command =
+      messageCommands.find((cmd) => cmd.data.aliases.includes(commandName)) ||
+      messageCommands.get(commandName);
 
     if (!command) return;
 
