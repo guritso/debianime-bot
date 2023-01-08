@@ -31,11 +31,11 @@ export default class {
     const embed = {
       title: "Missing Permissions",
       color: client.color.int.red,
-      description: missingClient.join("\n"),
       footer: { text: `For ${client.user.tag}` },
     };
 
     if (missingClient) {
+      embed.description = missingClient.join("\n");
       return message.member.send({ embeds: [embed] }).catch(() => {});
     }
 
