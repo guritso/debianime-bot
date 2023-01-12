@@ -21,5 +21,8 @@
 ### Message
 
 * shutdown
+* prefix
+* help
+* say
 
 > building...
