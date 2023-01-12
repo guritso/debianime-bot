@@ -5,6 +5,10 @@ export default class Database extends Client {
   constructor() {
     super(process.env.REPLIT_DB_URL);
     this.cache = new Map();
+    this.body = {
+      prefix: ".",
+      levels: {},
+    };
   }
   async execute() {
     const data = await super.list();
@@ -14,11 +18,11 @@ export default class Database extends Client {
       this.cache.set(key, value);
       console.log("  •", key);
     }
-    
+
     return this;
   }
   async set(key, value) {
-    const data = this.cache.get(key);
+    const data = this.cache.get(key) || this.body;
     const join = { ...data, ...value };
 
     await super.set(key, join);
