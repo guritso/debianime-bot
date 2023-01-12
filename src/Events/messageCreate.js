@@ -13,6 +13,9 @@ export default class {
       : bot.prefix;
 
     if (author.bot) return;
+    if (message.mentions.users.has(client.user.id)) {
+      return message.reply("> My prefix is: " + prefix);
+    }
     if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
     const args = content.trim().slice(prefix.length).split(/ +/g);
