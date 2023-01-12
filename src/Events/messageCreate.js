@@ -6,13 +6,15 @@ export default class {
   }
   async execute(message) {
     const { client, author, content, channel } = message;
-    const { bot, messageCommands } = client;
+    const { database, bot, messageCommands } = client;
 
     if (author.bot) return;
 
-    if (!content.toLowerCase().startsWith(bot.prefix)) return;
+    const { prefix } = database.cache.get(message.guild.id) || bot;
 
-    const args = content.trim().slice(bot.prefix.length).split(/ +/g);
+    if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
+
+    const args = content.trim().slice(prefix.length).split(/ +/g);
     const commandName = args.shift().toLowerCase();
     const command =
       messageCommands.find((cmd) => cmd.data.aliases.includes(commandName)) ||
