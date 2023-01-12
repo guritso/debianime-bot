@@ -3,7 +3,7 @@ export default class {
     this.data = {
       name: "help",
       description: "show the command's description",
-      aliases: ["h", "info"],
+      aliases: ["h", "info", "cmds"],
       permissionsBot: ["EmbedLinks", "SendMessages"],
     };
   }
@@ -11,31 +11,33 @@ export default class {
     const { messageCommands } = client;
 
     const embed = {
-      title: "Help",
-      fields: [],
+      author: {
+        name: `Help in ${message.guild.name}`,
+        icon_url: message.guild.iconURL(),
+      },
+      description: "",
       color: client.color.int.primary,
     };
 
+    let m = "`";
+
     if (!args.length) {
       messageCommands.forEach((cmd) => {
-        embed.fields.push({
-          name: cmd.data.name,
-          value: cmd.data.description,
-        });
+        embed.description +=
+          `${m + cmd.data.name + m} - **${cmd.data.description}**\n` +
+          `Aliases: _${cmd.data.aliases.join(", ")}_\n`;
       });
     } else {
       const name = args.shift().toLowerCase();
       const cmd = await messageCommands.find(
         (c) => c.data.aliases.includes(name) || c.data.name == name
       );
-      embed.fields.push({
-        name: cmd.data.name,
-        value: cmd.data.description,
-      });
+
+      embed.description =
+        `${m + cmd.data.name + m} - **${cmd.data.description}**\n` +
+        `Aliases: _${cmd.data.aliases.join(", ")}_\n`;
     }
 
-    message.channel.send({
-      embeds: [embed],
-    });
+    message.reply({ embeds: [embed] });
   }
 }
