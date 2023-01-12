@@ -5,13 +5,14 @@ export default class {
     this.once = false;
   }
   async execute(message) {
-    const { client, author, content, channel } = message;
+    const { client, author, content, channel, guild } = message;
     const { database, bot, messageCommands } = client;
 
+    const prefix = database.cache.get(guild.id)
+      ? database.cache.get(guild.id).prefix || bot.prefix
+      : bot.prefix;
+
     if (author.bot) return;
-
-    const { prefix } = database.cache.get(message.guild.id) || bot;
-
     if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
     const args = content.trim().slice(prefix.length).split(/ +/g);
