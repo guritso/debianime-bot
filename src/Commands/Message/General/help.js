@@ -24,9 +24,9 @@ export default class {
         });
       });
     } else {
-      const name = args.shift();
+      const name = args.shift().toLowerCase();
       const cmd = await messageCommands.find(
-        (cmd) => cmd.aliases.includes(name) || cmd.name == name
+        (c) => c.data.aliases.includes(name) || c.data.name == name
       );
       embed.fields.push({
         name: cmd.data.name,
