@@ -5,14 +5,14 @@ import Loader from "../Utils/Loader.js";
 export default class DebiAnime extends Client {
   constructor(options = {}) {
     super(clientOptions);
+    this.setup(options);
+    
     this.interactionCommands = new Collection();
     this.messageCommands = new Collection();
-
-    this.validate(options);
     this.loader = new Loader(this);
   }
 
-  validate(options) {
+  setup(options) {
     this.guild = options.guild;
     this.bot = options.bot;
     this.color = options.color;
