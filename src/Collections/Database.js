@@ -2,9 +2,8 @@ import Client from "@replit/database";
 import "dotenv/config";
 
 export default class Database extends Client {
-  constructor(client) {
+  constructor() {
     super(process.env.REPLIT_DB_URL);
-    this.client = client;
     this.cache = new Map();
   }
   async execute() {
@@ -15,8 +14,8 @@ export default class Database extends Client {
       this.cache.set(key, value);
       console.log("  •", key);
     }
-
-    this.client.database = this;
+    
+    return this;
   }
   async set(key, value) {
     const data = this.cache.get(key);
