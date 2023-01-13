@@ -2,27 +2,8 @@
 
 > A bot in ES6 for the DebiAnime discord server
 
-## Commands
-
-### Slash
-
-* avatar
-* ping
-* prune
-* channel
-
-#### SubCommand
-* rename
-
-### Context
-
-* Avatar
-
-### Message
-
-* shutdown
-* prefix
-* help
-* say
-
-> building...
+|            | SLASH            | MESSAGE       | CONTEXT |
+|------------|------------------|---------------|---------|
+| GENERAL    | avatar<br>ping   | help          | Avatar  |
+| MANAGER    | prune<br>channel | prefix<br>say |         |
+| DEVELOPER  |                  | shutdown      |         |
