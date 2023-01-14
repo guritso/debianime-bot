@@ -4,25 +4,14 @@
 
 ## Commands
 
-### Slash
+|            | SLASH            | MESSAGE       | CONTEXT |
+|------------|------------------|---------------|---------|
+| GENERAL    | avatar<br>ping   | help          | Avatar  |
+| MANAGER    | prune<br>channel | prefix<br>say |         |
+| DEVELOPER  |                  | shutdown      |         |
 
-* avatar
-* ping
-* prune
-* channel
+### SubCommands
 
-#### SubCommand
-* rename
-
-### Context
-
-* Avatar
-
-### Message
-
-* shutdown
-* prefix
-* help
-* say
-
-> building...
+| channel |  rename |
+|---------|:-------:|
+| say     | channel |
