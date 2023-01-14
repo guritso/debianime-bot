@@ -10,6 +10,8 @@ export default class {
   }
   async execute(message, args, client) {
     let { channel } = message;
+    
+    if(!args.length) return;
 
     if (args[0].toLowerCase() == "channel") {
       args.shift();
