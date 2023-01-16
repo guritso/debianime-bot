@@ -54,10 +54,8 @@ export default class {
       return message.member.send({ embeds: [embed] }).catch(() => {});
     }
 
-    try {
-      command.execute(message, args, client);
-    } catch (err) {
+    command.execute(message, args, client).catch((err) => {
       console.log(err);
-    }
+    });
   }
 }
