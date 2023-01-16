@@ -27,11 +27,8 @@ export default class {
         ephemeral: true,
       });
     }
-
-    try {
-      command.execute(interaction, client);
-    } catch (err) {
-      console.log(err);
-    }
+   command.execute(interaction, client).catch((err) => {
+     console.log(err);
+   });
   }
 }
