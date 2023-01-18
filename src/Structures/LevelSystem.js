@@ -37,6 +37,12 @@ export default class LevelSystem {
         description: `${tag} as reached level **${userData.level}**!`,
       };
 
+      const permissions = channel.permissionsFor(client.user.id);
+      const isSendable = permissions.has("SendMessages");
+      const isEmbedable = permissions.has("EmbedLinks");
+
+      if (!isSendable || !isEmbedable) return;
+
       channel.send({
         content: `<@${id}>`,
         embeds: [embed],
