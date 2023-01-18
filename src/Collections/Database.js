@@ -7,7 +7,7 @@ export default class Database extends Client {
     this.cache = new Map();
     this.body = {
       prefix: ".",
-      levels: {},
+      levels: [],
     };
   }
   async execute() {

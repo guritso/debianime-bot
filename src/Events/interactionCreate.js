@@ -27,8 +27,6 @@ export default class {
         ephemeral: true,
       });
     }
-   command.execute(interaction, client).catch((err) => {
-     console.log(err);
-   });
+   command.execute(interaction, client)
   }
 }

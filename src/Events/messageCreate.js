@@ -1,3 +1,4 @@
+import LevelSystem from "../Structures/LevelSystem.js";
 import Permission from "../Utils/Permission.js";
 
 export default class {
@@ -16,6 +17,10 @@ export default class {
     if (message.mentions.users.has(client.user.id)) {
       return message.reply("> My prefix is: " + prefix);
     }
+
+    const levelSystem = new LevelSystem(message);
+    levelSystem.execute(database);
+
     if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
     const args = content.trim().slice(prefix.length).split(/ +/g);
@@ -54,8 +59,6 @@ export default class {
       return message.member.send({ embeds: [embed] }).catch(() => {});
     }
 
-    command.execute(message, args, client).catch((err) => {
-      console.log(err);
-    });
+    command.execute(message, args, client);
   }
 }
