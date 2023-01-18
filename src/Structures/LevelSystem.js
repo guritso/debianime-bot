@@ -9,15 +9,15 @@ export default class LevelSystem {
     this.message = message;
   }
   async execute(database) {
+    const { guild, channel, client } = this.message;
     const { id, tag } = this.body;
-    const { guild, channel } = this.message;
 
     if (!database.cache.get(guild.id)) {
-      await database.set(guild.id);
+      await database.set(guild.id, { levels: [] });
     }
 
     const levels = database.cache.get(guild.id).levels;
-    const userData = levels.find((l) => l.id == id);
+    const userData = levels.find((user) => user.id == id);
 
     if (!userData) {
       levels.push(this.body);
@@ -33,6 +33,7 @@ export default class LevelSystem {
 
       const embed = {
         title: "Level Up",
+        color: client.color.int.primary,
         description: `${tag} as reached level **${userData.level}**!`,
       };
 
