@@ -3,7 +3,7 @@ export default class {
     this.data = {
       type: 1,
       name: "levels",
-      description: "Show the users level ranking",
+      description: "Show raking of user levels",
     };
   }
   execute(interaction) {
@@ -14,12 +14,12 @@ export default class {
       return interaction.reply("> There's no raking!");
     }
 
+    const levels = database.cache.get(guild.id).levels;
     const ranking = [];
     const author = {};
 
-    const levels = database.cache.get(guild.id).levels;
-
     levels.sort((a, b) => b.level - a.level);
+    
     levels.forEach((member, index) => {
       if (index + 1 >= 10) return;
       if (member.level == 0) return;
