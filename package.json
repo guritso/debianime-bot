@@ -5,7 +5,7 @@
   "main": "index.js",
   "packageManager": "yarn@3.3.0",
   "dependencies": {
-    "@replit/database": "^2.0.2",
+    "@keyv/mongo": "^2.1.8",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3"
   },
