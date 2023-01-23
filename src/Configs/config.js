@@ -1,16 +1,38 @@
 import "dotenv/config";
-import colors from "./colors.js";
-import options from "./options.js";
 
-export default {
-  db: options,
-  bot: {
-    prefix: ".",
-    TOKEN: process.env.TOKEN,
-    ID: "1054588440143986788",
-  },
-  guild: {
-    ID: "794717836827688981",
-  },
-  color: colors,
+const bot = {
+  prefix: ".",
+  token: process.env.TOKEN,
+  id: "1054588440143986788",
 };
+
+const guild = {
+  id: "794717836827688981",
+};
+
+const mongo = {
+  uri: process.env.MONGO_DB_URI,
+  dbName: "DebiAnimeDB",
+  collection: "guilds",
+};
+
+const color = {
+  hex: {
+    primary: "#FF0044",
+    secondary: "#000000",
+    yellow: "#ffee09",
+    red: "#f32323",
+    green: "#00ff23",
+    blue: "#0060ff",
+  },
+  int: {
+    primary: 0xff0044,
+    secondary: 0x000000,
+    yellow: 0xffee09,
+    red: 0xf32323,
+    green: 0x00ff23,
+    blue: 0x0060ff,
+  },
+};
+
+export default { bot, guild, mongo, color };
