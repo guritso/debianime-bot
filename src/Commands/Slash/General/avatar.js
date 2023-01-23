@@ -15,6 +15,7 @@ export default class {
     };
   }
   async execute(interaction, client) {
+    const { color } = client.config;
     const user = interaction.options.getUser("user");
     const author = interaction.user;
     const member = user || author;
@@ -27,7 +28,7 @@ export default class {
     }
     const embed = {
       title: member.tag,
-      color: client.color.int.primary,
+      color: color.int.primary,
       image: {
         url: member.avatarURL({ size: 2048 }),
       },

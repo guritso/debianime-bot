@@ -8,7 +8,7 @@ export default class {
   }
   execute(interaction) {
     const { client, guild, user } = interaction;
-    const { database } = client;
+    const { database, config } = client;
 
     if (!database.cache.get(guild.id)) return;
 
@@ -33,7 +33,7 @@ export default class {
     const embed = {
       title: `Levels on ${guild.name}`,
       description: ranking.join("\n"),
-      color: client.color.int.primary,
+      color: config.color.int.primary,
       footer: {
         text: `#${author.position} • ${user.tag} • LVL: ${author.level}`,
         icon_url: user.avatarURL(),

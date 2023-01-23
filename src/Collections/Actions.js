@@ -11,7 +11,7 @@ export default class Actions {
     const folders = readdirSync(PATH);
 
     return new Promise(async (resolve) => {
-      for (let name of folders) {
+      for await (let name of folders) {
         const enmap = new Enmap(`${PATH}/${name}`);
 
         if (name == "Message") {
