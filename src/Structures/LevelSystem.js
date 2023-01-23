@@ -12,8 +12,6 @@ export default class LevelSystem {
     const { guild, channel, client } = this.message;
     const { id, tag } = this.body;
 
-    await database.set(guild.id);
-
     const { members } = database.cache.get(guild.id);
     const userData = members.find((user) => user.id == id);
 
@@ -31,7 +29,7 @@ export default class LevelSystem {
 
       const embed = {
         title: "Level Up",
-        color: client.color.int.primary,
+        color: client.config.color.int.primary,
         description: `${tag} as reached level **${userData.level}**!`,
       };
 

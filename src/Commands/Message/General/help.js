@@ -8,7 +8,7 @@ export default class {
     };
   }
   async execute(message, args, client) {
-    const { messageCommands } = client;
+    const { messageCommands, config } = client;
 
     const embed = {
       author: {
@@ -16,7 +16,7 @@ export default class {
         icon_url: message.guild.iconURL(),
       },
       description: "",
-      color: client.color.int.primary,
+      color: config.color.int.primary,
     };
 
     let m = "`";

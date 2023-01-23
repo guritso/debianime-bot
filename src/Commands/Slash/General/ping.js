@@ -4,6 +4,7 @@ export default class {
       type: 1,
       name: "ping",
       description: "send the ping",
+      guild: true
     };
   }
   async execute(interaction, client) {
@@ -16,7 +17,7 @@ export default class {
         { name: "BOT:", value: `${bot}ms`, inline: true },
         { name: "API:", value: `${api}ms`, inline: true },
       ],
-      color: client.color.int.primary,
+      color: client.config.color.int.primary,
     };
 
     interaction.reply({

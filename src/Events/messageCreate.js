@@ -7,13 +7,14 @@ export default class {
   }
   async execute(message) {
     const { client, author, content, channel, guild } = message;
-    const { database, bot, messageCommands } = client;
+    const { database, messageCommands, config } = client;
 
-    const prefix = database.cache.get(guild.id)
-      ? database.cache.get(guild.id).prefix || bot.prefix
-      : bot.prefix;
+    await database.ensure(guild.id);
+
+    const { prefix } = database.cache.get(guild.id);
 
     if (author.bot) return;
+
     if (message.mentions.users.has(client.user.id)) {
       return message.reply("> My prefix is: " + prefix);
     }
@@ -41,7 +42,7 @@ export default class {
 
     const embed = {
       title: "Missing Permissions",
-      color: client.color.int.red,
+      color: config.color.int.red,
       footer: { text: `For ${client.user.tag}` },
     };
 

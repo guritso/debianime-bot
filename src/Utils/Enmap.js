@@ -14,13 +14,14 @@ export default class Enmap {
           name.endsWith(".js")
         );
 
-        for (let cmd of files) {
+        for await (let cmd of files) {
           const Load = await import(`${PATH}/${dir}/${cmd}`);
           const load = await new Load.default();
 
           map.set(load.data.name, load);
           console.log(`  • ${load.data.name}`);
         }
+
         if (this.folders.length == index + 1) resolve();
       });
     });

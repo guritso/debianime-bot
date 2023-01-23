@@ -1,11 +1,11 @@
 import Keyv from "@keyv/mongo";
 
 export default class Database extends Keyv {
-  constructor({ db: options }) {
-    super(options);
+  constructor({ config }) {
+    super(config.mongo);
     this.cache = new Map();
     this.body = {
-      prefix: ".",
+      prefix: config.bot.prefix,
       members: [],
     };
   }
@@ -24,5 +24,10 @@ export default class Database extends Keyv {
     await Object.assign(data, value);
     await this.cache.set(key, data);
     await super.set(key, data);
+  }
+  async ensure(id) {
+    if (this.cache.get(id)) return;
+
+    await this.set(id);
   }
 }
