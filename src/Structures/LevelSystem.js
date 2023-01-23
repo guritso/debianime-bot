@@ -12,16 +12,14 @@ export default class LevelSystem {
     const { guild, channel, client } = this.message;
     const { id, tag } = this.body;
 
-    if (!database.cache.get(guild.id)) {
-      await database.set(guild.id, { levels: [] });
-    }
+    await database.set(guild.id);
 
-    const levels = database.cache.get(guild.id).levels;
-    const userData = levels.find((user) => user.id == id);
+    const { members } = database.cache.get(guild.id);
+    const userData = members.find((user) => user.id == id);
 
     if (!userData) {
-      levels.push(this.body);
-      return database.set(guild.id, { levels: levels });
+      members.push(this.body);
+      return database.set(guild.id, { members });
     }
 
     const target = userData.level * 10 + 100;
@@ -49,6 +47,6 @@ export default class LevelSystem {
       });
     }
 
-    database.set(guild.id, { levels: levels });
+    database.set(guild.id, { members });
   }
 }

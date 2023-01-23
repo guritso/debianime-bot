@@ -5,10 +5,10 @@ import Events from "../Structures/Events.js";
 
 export default class {
   constructor(client) {
+    this.database = new Database(client);
     this.actions = new Actions(client);
     this.handler = new Handler(client);
     this.events = new Events(client);
-    this.database = new Database();
 
     client.database = this.database;
   }

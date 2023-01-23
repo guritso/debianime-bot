@@ -1,31 +1,28 @@
-import Client from "@replit/database";
-import "dotenv/config";
+import Keyv from "@keyv/mongo";
 
-export default class Database extends Client {
-  constructor() {
-    super(process.env.REPLIT_DB_URL);
+export default class Database extends Keyv {
+  constructor({ db: options }) {
+    super(options);
     this.cache = new Map();
     this.body = {
       prefix: ".",
-      levels: [],
+      members: [],
     };
   }
   async execute() {
-    const data = await super.list();
-
-    for (let key of data) {
-      const value = await super.get(key);
+    for await (const [key, value] of this.iterator()) {
       this.cache.set(key, value);
-      console.log("  •", key);
     }
+
+    console.log(`  • loaded data of ${this.cache.size} guilds!`);
 
     return this;
   }
   async set(key, value) {
-    const data = this.cache.get(key) || this.body;
-    const join = { ...data, ...value };
+    const data = { ...this.body, ...this.cache.get(key) };
 
-    await super.set(key, join);
-    this.cache.set(key, join);
+    await Object.assign(data, value);
+    await this.cache.set(key, data);
+    await super.set(key, data);
   }
 }

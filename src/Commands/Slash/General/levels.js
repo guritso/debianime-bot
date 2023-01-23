@@ -10,18 +10,16 @@ export default class {
     const { client, guild, user } = interaction;
     const { database } = client;
 
-    if (!database.cache.get(guild.id)) {
-      return interaction.reply("> There's no raking!");
-    }
+    if (!database.cache.get(guild.id)) return;
 
-    const levels = database.cache.get(guild.id).levels;
+    const { members } = database.cache.get(guild.id);
     const ranking = [];
     const author = {};
 
-    levels.sort((a, b) => b.level - a.level);
-    
-    levels.forEach((member, index) => {
-      if (index + 1 >= 10) return;
+    members.sort((a, b) => b.level - a.level);
+
+    members.forEach((member, index) => {
+      if (index >= 9) return;
       if (member.level == 0) return;
 
       ranking.push(`#${index + 1} • ${member.tag} • LVL: **${member.level}**`);
