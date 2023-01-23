@@ -13,6 +13,7 @@ export default class DebiAnime extends Client {
   }
 
   setup(options) {
+    this.db = options.db
     this.guild = options.guild;
     this.bot = options.bot;
     this.color = options.color;
