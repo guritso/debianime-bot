@@ -4,7 +4,7 @@ import validate from "../Utils/validate.js";
 import Loader from "../Utils/Loader.js";
 
 export default class DebiAnime extends Client {
-  constructor(config = {}) {
+  constructor(config) {
     super(clientOptions);
     this.config = validate(config);
 
