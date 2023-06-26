@@ -21,7 +21,7 @@ export default class LevelSystem {
       members.push(this.body);
       return database.set(guild.id, { members });
     }
-    // add experience 
+    // add experience
     const experience = addExperience(userData);
     // add level if experience reach the target
     if (experience >= getTarget(userData)) {

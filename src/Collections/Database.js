@@ -6,6 +6,8 @@ export default class Database extends Keyv {
     this.cache = new Map();
     this.body = {
       prefix: config.bot.prefix,
+      welcome_channel: null,
+      level_channel: null,
       members: [],
     };
   }
@@ -25,9 +27,9 @@ export default class Database extends Keyv {
     await this.cache.set(key, data);
     await super.set(key, data);
   }
-  async ensure(id) {
-    if (this.cache.get(id)) return;
+  async ensure(key) {
+    if (this.cache.get(key)) return;
 
-    await this.set(id);
+    await this.set(key);
   }
 }
