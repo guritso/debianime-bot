@@ -4,6 +4,7 @@ export default class {
       type: 1,
       name: "levels",
       description: "Show raking of user levels",
+      dm_permission: false,
     };
   }
   execute(interaction) {

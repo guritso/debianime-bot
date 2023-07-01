@@ -3,7 +3,7 @@ export default class {
     this.data = {
       name: "channel",
       description: "manage channels",
-      dm_permissions: false,
+      dm_permission: false,
       default_member_permissions: 1 << 4, // ManageChannels
       options: [
         {

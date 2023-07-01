@@ -4,7 +4,7 @@ export default class {
       type: 1,
       name: "ping",
       description: "send the ping",
-      guild: true
+      guild: true,
     };
   }
   async execute(interaction, client) {
