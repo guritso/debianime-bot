@@ -3,19 +3,20 @@ export default class {
     this.data = {
       name: "Avatar",
       type: 2,
+      dm_permission: false,
     };
   }
   async execute(interaction, client) {
-    const user = interaction.options.getMember("user");
+    const { color } = client.config;
+    const target = interaction.options.getMember("user");
     const author = interaction.member;
-    
-    const MSG = "Requested by"
+    const MSG = "Requested by";
 
     const embed = {
-      title: user.nickname || user.user.username,
-      color: client.color.int.primary,
+      title: target.nickname || target.user.username,
+      color: color.int.primary,
       image: {
-        url: user.displayAvatarURL({ size: 2048 }),
+        url: target.displayAvatarURL({ size: 2048 }),
       },
       footer: {
         text: `${MSG} ${author.nickname || author.user.username}`,

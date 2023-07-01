@@ -4,6 +4,7 @@ export default class {
       type: 1,
       name: "avatar",
       description: "send your and others avatar",
+      dm_permission: false,
       options: [
         {
           name: "user",
@@ -16,25 +17,19 @@ export default class {
   }
   async execute(interaction, client) {
     const { color } = client.config;
-    const user = interaction.options.getUser("user");
-    const author = interaction.user;
-    const member = user || author;
+    const target = interaction.options.getMember("user");
+    const author = interaction.member;
+    const member = target || author;
 
-    if (!member) {
-      interaction.reply({
-        content: "Something's wrong",
-        ephemeral: true,
-      });
-    }
     const embed = {
-      title: member.tag,
+      title: member.nickname || member.user.username,
       color: color.int.primary,
       image: {
-        url: member.avatarURL({ size: 2048 }),
+        url: member.displayAvatarURL({ size: 2048 }),
       },
       footer: {
-        text: `Requested by ${author.tag}`,
-        icon_url: author.avatarURL(),
+        text: `Requested by ${author.nickname || author.user.username}`,
+        icon_url: author.displayAvatarURL(),
       },
     };
 
