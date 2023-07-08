@@ -23,7 +23,7 @@ export default class {
       if (index >= 9) return;
       if (member.level == 0) return;
 
-      ranking.push(`#${index + 1} • ${member.tag} • LVL: **${member.level}**`);
+      ranking.push(`#${index + 1} • ${member.name} • LVL: **${member.level}**`);
 
       if (user.id == member.id) {
         author.level = member.level;
@@ -36,7 +36,7 @@ export default class {
       description: ranking.join("\n"),
       color: config.color.int.primary,
       footer: {
-        text: `#${author.position} • ${user.tag} • LVL: ${author.level}`,
+        text: `#${author.position} • ${user.username} • LVL: ${author.level}`,
         icon_url: user.avatarURL(),
       },
     };

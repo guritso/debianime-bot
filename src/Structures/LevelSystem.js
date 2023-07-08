@@ -2,7 +2,7 @@ export default class LevelSystem {
   constructor(message) {
     this.body = {
       id: message.author.id,
-      tag: message.author.tag,
+      name: message.author.username,
       level: 0,
       experience: 10,
     };
@@ -10,7 +10,7 @@ export default class LevelSystem {
   }
   async execute(database) {
     const { guild, channel, client } = this.message;
-    const { id, tag } = this.body;
+    const { id, name } = this.body;
     // get the permissions from the channel
     const permissions = channel.permissionsFor(client.user.id);
     // get the user from the database
@@ -30,7 +30,7 @@ export default class LevelSystem {
       const embed = {
         title: "Level Up",
         color: client.config.color.int.primary,
-        description: `${tag} as reached level **${userLevel}**!`,
+        description: `${name} as reached level **${userLevel}**!`,
       };
 
       const isSendable = permissions.has("SendMessages");
