@@ -8,7 +8,7 @@ export default class Mudae {
       !mudae ||
       author.username !== "Mudae" ||
       !message.embeds.length ||
-      !message.components.length
+      message.components.length
     ) {
       return;
     }
