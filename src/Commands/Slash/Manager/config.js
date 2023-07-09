@@ -14,7 +14,7 @@ export default class {
           type: 3,
           choices: [
             { name: "welcome channel", value: "welcome" },
-            { name: "levels channel", value: "levels" },
+            { name: "Ranking channel", value: "ranking" },
             { name: "logs channel", value: "logs" },
           ],
         },
@@ -61,7 +61,7 @@ export default class {
       }
     }
 
-    const { welcome, levels, logs } = channels;
+    const { welcome, ranking, logs } = channels;
 
     const embed = {
       author: {
@@ -72,7 +72,7 @@ export default class {
       fields: [
         { name: "Prefix", value: prefix },
         { name: "Welcome channel", value: getChName(welcome) },
-        { name: "Levels channel", value: getChName(levels) },
+        { name: "Ranking channel", value: getChName(ranking) },
         { name: "Logs channel", value: getChName(logs) },
       ],
     };

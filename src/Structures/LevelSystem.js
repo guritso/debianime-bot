@@ -31,7 +31,7 @@ export default class LevelSystem {
         description: `${name} as reached level **${userLevel}**!`,
       };
       // get the channel using the id from database
-      const channel = guild.channels.cache.get(channels.levels);
+      const channel = guild.channels.cache.get(channels.ranking);
       if (!channel) return;
       // get the permissions from the channel
       const permissions = channel.permissionsFor(client.user.id);

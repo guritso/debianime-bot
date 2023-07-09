@@ -2,8 +2,8 @@ export default class {
   constructor() {
     this.data = {
       type: 1,
-      name: "levels",
-      description: "Show raking of user levels",
+      name: "ranking",
+      description: "shows user ranking per message sent",
       dm_permission: false,
     };
   }
@@ -32,7 +32,7 @@ export default class {
     });
 
     const embed = {
-      title: `Levels on ${guild.name}`,
+      title: `Ranking on ${guild.name}`,
       description: ranking.join("\n"),
       color: config.color.int.primary,
       footer: {
