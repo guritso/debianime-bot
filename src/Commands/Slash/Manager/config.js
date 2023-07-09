@@ -24,9 +24,7 @@ export default class {
   async execute(interaction) {
     const { client, guild } = interaction;
     const { database, config } = client;
-
     const { prefix, channels } = database.cache.get(guild.id);
-
     const string = interaction.options.getString("set");
 
     if (string) {
