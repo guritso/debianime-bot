@@ -8,6 +8,10 @@ export default class {
     const { client, commandName } = interaction;
     const commands = client.interactionCommands;
     const command = commands.get(commandName);
+    
+    client.database.ensure(interaction.guild.id);
+
+    if (!command) return;
 
     const permission = new Permission()
       .setNeeded(command.data.permissions)
@@ -27,6 +31,6 @@ export default class {
         ephemeral: true,
       });
     }
-   command.execute(interaction, client)
+    command.execute(interaction, client);
   }
 }

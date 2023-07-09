@@ -6,8 +6,7 @@ export default class Database extends Keyv {
     this.cache = new Map();
     this.body = {
       prefix: config.bot.prefix,
-      welcome_channel: null,
-      level_channel: null,
+      channels: {},
       members: [],
     };
   }
