@@ -20,15 +20,15 @@ export default class {
     members.sort((a, b) => b.level - a.level);
 
     members.forEach((member, index) => {
-      if (index >= 9) return;
-      if (member.level == 0) return;
-
-      ranking.push(`#${index + 1} • ${member.name} • LVL: **${member.level}**`);
-
       if (user.id == member.id) {
         author.level = member.level;
         author.position = index + 1;
       }
+
+      if (member.level == 0) return;
+      if (index >= 10) return;
+
+      ranking.push(`#${index + 1} • ${member.name} • LVL: **${member.level}**`);
     });
 
     const embed = {
