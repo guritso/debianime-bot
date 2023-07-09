@@ -4,10 +4,15 @@ export default class Mudae {
     const { client, guildId, author } = message;
     const { mudae } = client.database.cache.get(guildId);
 
-    if (!mudae) return;
-    if (author.username !== "Mudae") return;
-    if (!message.embeds.length) return;
-    console.log(message);
+    if (
+      !mudae ||
+      author.username !== "Mudae" ||
+      !message.embeds.length ||
+      !message.components.length
+    ) {
+      return;
+    }
+
     return await message.react("❤️");
   }
 }
