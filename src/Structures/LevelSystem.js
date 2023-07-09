@@ -9,12 +9,10 @@ export default class LevelSystem {
     this.message = message;
   }
   async execute(database) {
-    const { guild, channel, client } = this.message;
+    const { guild, client } = this.message;
     const { id, name } = this.body;
-    // get the permissions from the channel
-    const permissions = channel.permissionsFor(client.user.id);
     // get the user from the database
-    const { members } = database.cache.get(guild.id);
+    const { members, channels } = database.cache.get(guild.id);
     const userData = members.find((user) => user.id == id);
     // check if user exists, add if not
     if (!userData) {
@@ -32,11 +30,13 @@ export default class LevelSystem {
         color: client.config.color.int.primary,
         description: `${name} as reached level **${userLevel}**!`,
       };
+      // get the channel using the id from database
+      const channel = guild.channels.cache.get(channels.levels);
+      if (!channel) return;
+      // get the permissions from the channel
+      const permissions = channel.permissionsFor(client.user.id);
 
-      const isSendable = permissions.has("SendMessages");
-      const isEmbedable = permissions.has("EmbedLinks");
-
-      if (!isSendable || !isEmbedable) return;
+      if (!permissions.has(["EmbedLinks", "SendMessages"])) return;
 
       channel.send({
         content: `<@${id}>`,
