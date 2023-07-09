@@ -1,5 +1,6 @@
 import LevelSystem from "../Structures/LevelSystem.js";
 import Permission from "../Utils/Permission.js";
+import Mudae from "../Utils/Mudae.js";
 
 export default class {
   constructor() {
@@ -10,6 +11,9 @@ export default class {
     const { database, messageCommands, config } = client;
 
     await database.ensure(guild.id);
+
+    const mudae = new Mudae();
+    mudae.react(message);
 
     const { prefix } = database.cache.get(guild.id);
 
