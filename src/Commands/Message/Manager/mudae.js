@@ -3,7 +3,7 @@ export default class {
     this.data = {
       name: "mudae",
       description: "Add react to Mudae bot rolls",
-      aliases: ["react"],
+      aliases: ["react, mu, rolls"],
       permissionsBot: ["AddReactions"],
       permissionsUser: ["ManageMessages"],
     };
