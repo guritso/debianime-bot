@@ -2,7 +2,7 @@ export default class {
   constructor() {
     this.data = {
       name: "mudae",
-      description: "Add react to Mudae bot messages on/off",
+      description: "Add react to Mudae bot rolls",
       aliases: ["react"],
       permissionsBot: ["AddReactions"],
       permissionsUser: ["Administrator"],
