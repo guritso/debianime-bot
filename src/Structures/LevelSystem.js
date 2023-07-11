@@ -32,16 +32,17 @@ export default class LevelSystem {
       };
       // get the channel using the id from database
       const channel = guild.channels.cache.get(channels.ranking);
-      if (!channel) return;
-      // get the permissions from the channel
-      const permissions = channel.permissionsFor(client.user.id);
+      // checks if have one
+      if (channel) {
+        // get the permissions from the channel
+        const permissions = channel.permissionsFor(client.user.id);
 
-      if (!permissions.has(["EmbedLinks", "SendMessages"])) return;
-
-      channel.send({
-        content: `<@${id}>`,
-        embeds: [embed],
-      });
+        if (permissions.has(["EmbedLinks", "SendMessages"])) {
+          channel.send({ content: `<@${id}>`, embeds: [embed] });
+        }
+      }
+      
+      
     }
     // save in the database
     return database.set(guild.id, { members });
