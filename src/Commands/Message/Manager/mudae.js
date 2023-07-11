@@ -5,7 +5,7 @@ export default class {
       description: "Add react to Mudae bot rolls",
       aliases: ["react"],
       permissionsBot: ["AddReactions"],
-      permissionsUser: ["Administrator"],
+      permissionsUser: ["ManageMessages"],
     };
   }
   async execute(message, args, client) {
