@@ -8,7 +8,8 @@ export default class {
     };
   }
   async execute(message, args, client) {
-    const { messageCommands, config } = client;
+    const { messageCommands, config, database } = client;
+    const { prefix } = database.cache.get(message.guildId);
 
     const embed = {
       author: {
@@ -24,7 +25,7 @@ export default class {
     if (!args.length) {
       messageCommands.forEach((cmd) => {
         embed.description +=
-          `${m + cmd.data.name + m} - **${cmd.data.description}**\n` +
+          `${m + prefix + cmd.data.name + m} - **${cmd.data.description}**\n` +
           `Aliases: _${cmd.data.aliases.join(", ")}_\n`;
       });
     } else {
@@ -34,7 +35,7 @@ export default class {
       );
 
       embed.description =
-        `${m + cmd.data.name + m} - **${cmd.data.description}**\n` +
+        `${m + prefix + cmd.data.name + m} - **${cmd.data.description}**\n` +
         `Aliases: _${cmd.data.aliases.join(", ")}_\n`;
     }
 
