@@ -12,16 +12,16 @@ export default class {
     const { database } = client;
     const { mudae } = database.cache.get(message.guildId);
 
-    let change;
+    let status;
 
     if (!mudae) {
       database.set(message.guild.id, { mudae: true });
-      change = "on :white_check_mark:";
+      status = "on :white_check_mark:";
     } else {
       database.set(message.guild.id, { mudae: false });
-      change = "off :x:";
+      status = "off :x:";
     }
 
-    message.reply("`React to Mudae: `" + change);
+    message.reply("`React to Mudae: `" + status);
   }
 }
