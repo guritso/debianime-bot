@@ -13,9 +13,9 @@ export default class {
           required: false,
           type: 3,
           choices: [
-            { name: "welcome channel", value: "welcome" },
+            { name: "Welcome channel", value: "welcome" },
             { name: "Ranking channel", value: "ranking" },
-            { name: "logs channel", value: "logs" },
+            { name: "Logs channel", value: "logs" },
           ],
         },
       ],
