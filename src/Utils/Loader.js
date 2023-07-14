@@ -2,6 +2,7 @@ import Database from "../Collections/Database.js";
 import Actions from "../Collections/Actions.js";
 import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
+import Api from "../Utils/Api.js";
 
 export default class {
   constructor(client) {
@@ -10,6 +11,7 @@ export default class {
     this.handler = new Handler(client);
     this.events = new Events(client);
 
+    client.api = new Api(client);
     client.database = this.database;
   }
   async execute() {
