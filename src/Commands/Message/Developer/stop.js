@@ -1,9 +1,9 @@
 export default class {
   constructor() {
     this.data = {
-      name: "shutdown",
+      name: "stop",
       description: "turn of the bot",
-      aliases: ["sd", "desligar", "stop"],
+      aliases: ["parar", "stop"],
       permissionsUser: ["Administrator"],
       permissionsBot: ["ViewChannel", "ManageMessages"],
     };
