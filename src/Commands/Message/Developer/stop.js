@@ -9,8 +9,7 @@ export default class {
     };
   }
   async execute(message, args, client) {
-    message.delete();
-    await message.member.send(`> ${client.user.tag} OFF!`);
-    process.exit(1);
+    await message.member.send(`${client.user.username} stoped`);
+    await client.api.execute("PUT", "app/stop");
   }
 }
