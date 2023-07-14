@@ -18,7 +18,6 @@ const mongo = {
 
 const discloud = {
   token: process.env.DISCLOUD_API_TOKEN,
-  appID: "1689311737341"
 };
 
 const color = {
