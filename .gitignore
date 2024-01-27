@@ -117,3 +117,4 @@ dist
 .discloudignore
 discloud.config
 test/
+.vscode/
