@@ -7,7 +7,7 @@
   "dependencies": {
     "@keyv/mongo": "^2.2.8",
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.2"
+    "dotenv": "^16.4.4"
   },
   "scripts": {
     "start": "node index.js"
