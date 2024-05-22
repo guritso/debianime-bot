@@ -8,7 +8,7 @@ const debiAnimeOptions = {
     GatewayIntentBits.MessageContent,
   ],
   presence: {
-    activities: [{ name: "Anime", type: 0 }],
+    activities: [{ name: "Anime", type: 3 }],
     status: "online",
   },
 };
