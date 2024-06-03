@@ -30,6 +30,6 @@
   "homepage": "https://github.com/GuriZenit/debianime-bot#readme",
   "type": "module",
   "devDependencies": {
-    "nodemon": "^3.1.1"
+    "nodemon": "^3.1.2"
   }
 }
