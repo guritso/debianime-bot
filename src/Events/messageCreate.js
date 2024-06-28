@@ -6,6 +6,7 @@ export default class {
   constructor() {
     this.once = false;
   }
+
   async execute(message) {
     const { client, author, content, channel, guild } = message;
     const { database, messageCommands, config } = client;
@@ -38,32 +39,48 @@ export default class {
 
     const { permissionsBot, permissionsUser } = command.data;
 
-    const permission = new Permission()
-      .setNeeded(permissionsBot)
-      .setMemberId(client.user.id)
-      .setChannel(channel);
-    const missingClient = await permission.getMissing();
+    const missingClient = await this.checkPermissions(
+      client.user.id,
+      permissionsBot,
+      channel,
+      config.color.int.red,
+      `For ${client.user.tag}`,
+      message
+    );
 
-    const embed = {
-      title: "Missing Permissions",
-      color: config.color.int.red,
-      footer: { text: `For ${client.user.tag}` },
-    };
+    if (missingClient) return;
 
-    if (missingClient) {
-      embed.description = missingClient.join("\n");
-      return message.member.send({ embeds: [embed] }).catch(() => {});
-    }
+    const missingAuthor = await this.checkPermissions(
+      author.id,
+      permissionsUser,
+      channel,
+      config.color.int.red,
+      `For ${author.tag}`,
+      message
+    );
 
-    permission.setMemberId(author.id).setNeeded(permissionsUser);
-    const missingAuthor = await permission.getMissing();
-
-    if (missingAuthor) {
-      embed.description = missingAuthor.join("\n");
-      embed.footer = { text: `For ${author.tag}` };
-      return message.member.send({ embeds: [embed] }).catch(() => {});
-    }
+    if (missingAuthor) return;
 
     command.execute(message, args, client);
+  }
+
+  async checkPermissions(memberId, neededPermissions, channel, color, footerText, message) {
+    const permission = new Permission()
+      .setNeeded(neededPermissions)
+      .setMemberId(memberId)
+      .setChannel(channel);
+    const missing = await permission.getMissing();
+
+    if (missing) {
+      const embed = {
+        title: "Missing Permissions",
+        color: color,
+        description: missing.join("\n"),
+        footer: { text: footerText },
+      };
+      await message.member.send({ embeds: [embed] }).catch(() => {});
+      return true;
+    }
+    return false;
   }
 }
