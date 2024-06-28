@@ -4,33 +4,50 @@ export default class {
   constructor() {
     this.once = false;
   }
+
   async execute(interaction) {
     const { client, commandName } = interaction;
     const commands = client.interactionCommands;
     const command = commands.get(commandName);
     
-    client.database.ensure(interaction.guild.id);
+    await client.database.ensure(interaction.guild.id);
 
     if (!command) return;
 
+    const missingPermissions = await this.checkPermissions(
+      client.user.id,
+      command.data.permissions,
+      interaction.channel,
+      client.color.int.red,
+      `For ${client.user.tag}`,
+      interaction
+    );
+
+    if (missingPermissions) return;
+
+    command.execute(interaction, client);
+  }
+
+  async checkPermissions(memberId, neededPermissions, channel, color, footerText, interaction) {
     const permission = new Permission()
-      .setNeeded(command.data.permissions)
-      .setChannel(interaction.channel)
-      .setMemberId(client.user.id);
+      .setNeeded(neededPermissions)
+      .setMemberId(memberId)
+      .setChannel(channel);
     const missing = await permission.getMissing();
 
-    if (missing) {
+    if (missing && missing.length > 0) {
       const embed = {
         title: "Missing Permissions",
+        color: color,
         description: missing.join("\n"),
-        color: client.color.int.red,
-        footer: { text: `For ${client.user.tag}` },
+        footer: { text: footerText },
       };
-      return interaction.reply({
+      await interaction.reply({
         embeds: [embed],
         ephemeral: true,
       });
+      return true;
     }
-    command.execute(interaction, client);
+    return false;
   }
 }
