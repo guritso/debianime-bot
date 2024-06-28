@@ -28,8 +28,5 @@
     "url": "https://github.com/GuriZenit/debianime-bot/issues"
   },
   "homepage": "https://github.com/GuriZenit/debianime-bot#readme",
-  "type": "module",
-  "devDependencies": {
-    "nodemon": "^3.1.4"
-  }
+  "type": "module"
 }
