@@ -36,4 +36,3 @@ export default class Database extends Keyv {
     }
   }
 }
-
