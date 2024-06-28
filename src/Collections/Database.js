@@ -26,7 +26,7 @@ export default class Database extends Keyv {
     const data = { ...this.body, ...this.cache.get(key) };
 
     await Object.assign(data, value);
-    await this.cache.set(key, data);
+    this.cache.set(key, data);
     await super.set(key, data);
   }
 
