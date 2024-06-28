@@ -18,7 +18,7 @@ export default class {
       client.user.id,
       command.data.permissions,
       interaction.channel,
-      client.color.int.red,
+      client.config.color.int.red,
       `For ${client.user.tag}`,
       interaction
     );
@@ -35,7 +35,7 @@ export default class {
       .setChannel(channel);
     const missing = await permission.getMissing();
 
-    if (missing && missing.length > 0) {
+    if (missing) {
       const embed = {
         title: "Missing Permissions",
         color: color,
