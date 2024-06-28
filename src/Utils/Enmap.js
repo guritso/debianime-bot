@@ -5,25 +5,26 @@ export default class Enmap {
     this.PATH = path;
     this.folders = readdirSync(this.PATH);
   }
+
   async execute(map) {
-    return new Promise((resolve) => {
-      const PATH = this.PATH;
+    const PATH = this.PATH;
 
-      this.folders.forEach(async (dir, index) => {
-        const files = readdirSync(`${PATH}/${dir}`).filter((name) =>
-          name.endsWith(".js")
-        );
+    const folderPromises = this.folders.map(async (dir) => {
+      const files = readdirSync(`${PATH}/${dir}`).filter((name) =>
+        name.endsWith(".js")
+      );
 
-        for await (let cmd of files) {
-          const Load = await import(`${PATH}/${dir}/${cmd}`);
-          const load = await new Load.default();
+      const filePromises = files.map(async (cmd) => {
+        const Load = await import(`${PATH}/${dir}/${cmd}`);
+        const load = await new Load.default();
 
-          map.set(load.data.name, load);
-          console.log(`  • ${load.data.name}`);
-        }
-
-        if (this.folders.length == index + 1) resolve();
+        map.set(load.data.name, load);
+        console.log(`  • ${load.data.name}`);
       });
+
+      await Promise.all(filePromises);
     });
+
+    await Promise.all(folderPromises);
   }
 }
