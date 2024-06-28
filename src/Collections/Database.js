@@ -11,6 +11,7 @@ export default class Database extends Keyv {
       members: [],
     };
   }
+
   async execute() {
     for await (const [key, value] of this.iterator()) {
       this.cache.set(key, value);
@@ -20,6 +21,7 @@ export default class Database extends Keyv {
 
     return this;
   }
+
   async set(key, value) {
     const data = { ...this.body, ...this.cache.get(key) };
 
@@ -27,9 +29,11 @@ export default class Database extends Keyv {
     await this.cache.set(key, data);
     await super.set(key, data);
   }
-  async ensure(key) {
-    if (this.cache.get(key)) return;
 
-    await this.set(key);
+  async ensure(key) {
+    if (!this.cache.has(key)) {
+      await this.set(key);
+    }
   }
 }
+
