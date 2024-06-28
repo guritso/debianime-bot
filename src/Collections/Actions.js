@@ -6,24 +6,21 @@ export default class Actions {
     this.interCommands = client.interactionCommands;
     this.messageCommands = client.messageCommands;
   }
-  execute() {
+
+  async execute() {
     const PATH = process.cwd() + "/src/Commands";
     const folders = readdirSync(PATH);
 
-    return new Promise(async (resolve) => {
-      for await (let name of folders) {
-        const enmap = new Enmap(`${PATH}/${name}`);
+    const promises = folders.map(async (name) => {
+      const enmap = new Enmap(`${PATH}/${name}`);
 
-        if (name == "Message") {
-          await enmap.execute(this.messageCommands);
-        } else {
-          await enmap.execute(this.interCommands);
-        }
-
-        if (folders.indexOf(name) == folders.length - 1) {
-          resolve();
-        }
+      if (name === "Message") {
+        await enmap.execute(this.messageCommands);
+      } else {
+        await enmap.execute(this.interCommands);
       }
     });
+
+    await Promise.all(promises);
   }
 }
