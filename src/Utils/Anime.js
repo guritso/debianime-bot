@@ -4,6 +4,13 @@ export default class Anime {
   }
 
   triggerAnimeOut(name, episode, image) {
-    this.client.emit("animeOut", { name, episode, image });
+    this.client.emit("animeOut", {
+      client: this.client,
+      anime: {
+        name,
+        episode,
+        image,
+      },
+    });
   }
 }
