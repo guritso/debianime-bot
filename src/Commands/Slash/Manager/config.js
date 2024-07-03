@@ -16,6 +16,7 @@ export default class {
             { name: "Welcome channel", value: "welcome" },
             { name: "Ranking channel", value: "ranking" },
             { name: "Logs channel", value: "logs" },
+            { name: "Anime channel", value: "anime" },
           ],
         },
       ],
@@ -61,7 +62,7 @@ export default class {
       }
     }
 
-    const { welcome, ranking, logs } = channels;
+    const { welcome, ranking, logs, anime } = channels;
 
     const embed = {
       author: {
@@ -74,6 +75,7 @@ export default class {
         { name: "Welcome channel", value: getChName(welcome) },
         { name: "Ranking channel", value: getChName(ranking) },
         { name: "Logs channel", value: getChName(logs) },
+        { name: "Anime channel", value: getChName(anime) },
       ],
     };
 
