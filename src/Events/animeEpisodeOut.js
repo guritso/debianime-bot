@@ -4,16 +4,20 @@ export default class {
   }
 
   async execute({ client, anime }) {
-    const { name, episode, image } = anime;
+    const { title, link, episode, image, pubDate } = anime;
     const { database, config } = client;
 
     const embed = {
-      title: `${name}`,
+      title: `${title.split("#")[0]}`,
       description: `Episode ${episode} is out!`,
       color: config.color.int.primary,
       image: {
         url: image,
       },
+      footer: {
+        text: `${pubDate}`,
+      },
+      url: link,
     };
 
     client.guilds.cache.forEach((guild) => {

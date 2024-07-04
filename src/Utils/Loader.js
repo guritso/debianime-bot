@@ -2,7 +2,7 @@ import Database from "../Collections/Database.js";
 import Actions from "../Collections/Actions.js";
 import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
-import AnimeApi from "../Structures/AnimeApi.js";
+import AnimeRss from "../Structures/AnimeRss.js";
 
 export default class Loader {
   constructor(client) {
@@ -13,7 +13,7 @@ export default class Loader {
     this.actions = new Actions(client);
     this.handler = new Handler(client);
     this.events = new Events(client);
-    this.animeApi = new AnimeApi(client);
+    this.animeRss = new AnimeRss(client);
   }
 
   async execute() {
@@ -22,7 +22,7 @@ export default class Loader {
       { name: "Actions", instance: this.actions },
       { name: "Handler", instance: this.handler },
       { name: "Events", instance: this.events },
-      { name: "AnimeApi", instance: this.animeApi },
+      { name: "AnimeRss", instance: this.animeRss },
     ];
 
     for (let i = 0; i < tasks.length; i++) {

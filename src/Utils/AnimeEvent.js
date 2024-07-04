@@ -3,13 +3,15 @@ export default class AnimeEvent {
     this.client = client;
   }
 
-  triggerAnimeEpisodeOut(name, episode, image) {
+  triggerAnimeEpisodeOut({ title, episode, link, image, pubDate }) {
     this.client.emit("animeEpisodeOut", {
       client: this.client,
       anime: {
-        name,
+        title,
         episode,
+        link,
         image,
+        pubDate,
       },
     });
   }
