@@ -4,7 +4,7 @@ export default class AnimeApi {
   constructor(client) {
     this.url = "https://api.jikan.moe/v4/seasons/now";
     this.database = client.database;
-    this.oldAnimesData = this.database.cache.get("animes") ?? [];
+    this.oldAnimes = this.database.cache.get("animes") ?? { data: [] };
     this.anime = new Anime();
   }
   async execute() {
@@ -20,12 +20,12 @@ export default class AnimeApi {
 
     setInterval(async () => {
       await this.checkAnimeOut(animes);
-      this.database.set("animes", animes);
+      this.database.set("animes", { data: animes });
     }, TIME_TO_CHECK);
   }
   checkAnimeOut(animes) {
     animes.forEach((anime) => {
-      this.oldAnimesData.forEach((oldAnime) => {
+      this.oldAnimes.data.forEach((oldAnime) => {
         if (anime.id === oldAnime.id) {
           if (anime.episodes > oldAnime.episodes) {
             this.anime.triggerAnimeOut(anime.name, anime.episodes, anime.image);
