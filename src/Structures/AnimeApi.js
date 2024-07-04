@@ -8,7 +8,7 @@ export default class AnimeApi {
   }
   async execute() {
     let oldAnimes = this.client.database.cache.get("anime-season")?.data || [];
-    const TIME_TO_CHECK = 60000; // 30min
+    const TIME_TO_CHECK = 600000; // 10min
 
     console.log(`  • Loaded ${oldAnimes.length} season animes`);
     setInterval(async () => {
