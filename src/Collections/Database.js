@@ -17,7 +17,7 @@ export default class Database extends Keyv {
       this.cache.set(key, value);
     }
 
-    console.log(`  • loaded data of ${this.cache.size} guilds!`);
+    console.log(`  • loaded data of ${this.cache.size - 1} guilds!`);
 
     return this;
   }
