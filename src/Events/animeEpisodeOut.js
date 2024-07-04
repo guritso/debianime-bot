@@ -5,11 +5,12 @@ export default class {
 
   async execute({ client, anime }) {
     const { name, episode, image } = anime;
-    const { database } = client;
+    const { database, config } = client;
 
     const embed = {
       title: `${name}`,
       description: `Episode ${episode} is out!`,
+      color: config.color.int.primary,
       image: {
         url: image,
       },
