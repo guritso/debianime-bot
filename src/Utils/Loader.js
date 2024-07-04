@@ -2,15 +2,18 @@ import Database from "../Collections/Database.js";
 import Actions from "../Collections/Actions.js";
 import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
+import AnimeApi from "../Structures/AnimeApi.js";
 
 export default class Loader {
   constructor(client) {
     this.database = new Database(client);
+
+    client.database = this.database;
+
     this.actions = new Actions(client);
     this.handler = new Handler(client);
     this.events = new Events(client);
-
-    client.database = this.database;
+    this.animeApi = new AnimeApi(client);
   }
 
   async execute() {
@@ -19,11 +22,12 @@ export default class Loader {
       { name: "Actions", instance: this.actions },
       { name: "Handler", instance: this.handler },
       { name: "Events", instance: this.events },
+      { name: "AnimeApi", instance: this.animeApi },
     ];
 
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
-      console.log(`↺ loading ${task.name}.......|${i + 1}/5|`);
+      console.log(`↺ loading ${task.name}.......|${i + 1}/6|`);
       try {
         await task.instance.execute();
       } catch (error) {
@@ -31,6 +35,6 @@ export default class Loader {
         return;
       }
     }
-    console.log("↺ loading Client.........|5/5|");
+    console.log("↺ loading Client.........|6/6|");
   }
 }
