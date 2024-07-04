@@ -1,10 +1,9 @@
-export default class AnimeOut {
+export default class {
   constructor() {
     this.once = false;
   }
 
-  async execute(data) {
-    const { client, anime } = data;
+  async execute({ client, anime }) {
     const { name, episode, image } = anime;
     const { database } = client;
 

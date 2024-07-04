@@ -1,11 +1,11 @@
-import Anime from "../Utils/Anime.js";
+import AnimeEvent from "../Utils/AnimeEvent.js";
 
 export default class AnimeApi {
   constructor(client) {
     this.url = "https://api.jikan.moe/v4/seasons/now";
     this.database = client.database;
     this.oldAnimes = this.database.cache.get("animes") ?? { data: [] };
-    this.anime = new Anime();
+    this.animeEvent = new AnimeEvent();
   }
   async execute() {
     const TIME_TO_CHECK = 1800000; // 30min
@@ -28,7 +28,7 @@ export default class AnimeApi {
       this.oldAnimes.data.forEach((oldAnime) => {
         if (anime.id === oldAnime.id) {
           if (anime.episodes > oldAnime.episodes) {
-            this.anime.triggerAnimeOut(anime.name, anime.episodes, anime.image);
+            this.animeEvent.triggerAnimeOut(anime.name, anime.episodes, anime.image);
           }
         }
       });

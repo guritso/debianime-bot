@@ -1,10 +1,10 @@
-export default class Anime {
+export default class AnimeEvent {
   constructor(client) {
     this.client = client;
   }
 
   triggerAnimeOut(name, episode, image) {
-    this.client.emit("animeOut", {
+    this.client.emit("animeEpisodeOut", {
       client: this.client,
       anime: {
         name,
