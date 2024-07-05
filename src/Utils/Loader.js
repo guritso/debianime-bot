@@ -27,7 +27,7 @@ export default class Loader {
 
     for (let i = 0; i < tasks.length; i++) {
       const task = tasks[i];
-      console.log(`↺ loading ${task.name}.......|${i + 1}/6|`);
+      console.log(`↺ loading ${task.name}.......|${i + 1}/${tasks.length}|`);
       try {
         await task.instance.execute();
       } catch (error) {
@@ -35,6 +35,6 @@ export default class Loader {
         return;
       }
     }
-    console.log("↺ loading Client.........|6/6|");
+    console.log(`↺ loading Client.........|${tasks.length}/${tasks.length}|`);
   }
 }
