@@ -1,5 +1,13 @@
+import os from 'os';
+
 export default (config) => {
   const { bot, guild, mongo } = config;
+
+  // Windows is not supported and I don't know why
+  if (os.platform() === 'win32') {
+    console.error("ERROR: Windows is not supported. only linux or mac");
+    process.exit(1);
+  }
 
   const ERROR_MESSAGES = {
     mongoUri: "mongodb uri",
