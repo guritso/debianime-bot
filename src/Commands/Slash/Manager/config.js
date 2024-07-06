@@ -8,89 +8,82 @@ export default class {
       default_member_permissions: 1 << 5, // ManageGuild
       options: [
         {
-          name: "set",
-          description: "Change the configs",
+          name: "welcome_channel",
+          description: "Set the welcome channel",
           required: false,
-          type: 3,
-          choices: [
-            { name: "Welcome channel", value: "welcome" },
-            { name: "Ranking channel", value: "ranking" },
-            { name: "Logs channel", value: "logs" },
-            { name: "Anime channel", value: "anime" },
-          ],
+          type: 7, // Channel type
+        },
+        {
+          name: "ranking_channel",
+          description: "Set the ranking channel",
+          required: false,
+          type: 7, // Channel type
+        },
+        {
+          name: "logs_channel",
+          description: "Set the logs channel",
+          required: false,
+          type: 7, // Channel type
+        },
+        {
+          name: "anime_channel",
+          description: "Set the anime channel",
+          required: false,
+          type: 7, // Channel type
         },
       ],
     };
   }
+
   async execute(interaction) {
     const { client, guild } = interaction;
-    const { database, config } = client;
-    const { prefix, channels } = database.cache.get(guild.id);
-    const string = interaction.options.getString("set");
+    const { database } = client;
+    const { channels, prefix } = database.cache.get(guild.id);
+    const MODIFIED_CHANNELS = [];
 
-    if (string) {
-      const selectMenu = {
-        type: 1,
-        components: [
-          {
-            type: 8,
-            custom_id: "selected_ch",
-            placeholder: "Select a channel",
-            channel_types: [0],
-          },
-        ],
-      };
-
-      const resolve = await interaction.reply({
-        content: `Set ${string} channel`,
-        ephemeral: true,
-        components: [selectMenu],
-      });
-
-      try {
-        const selected = await resolve.awaitMessageComponent({ time: 30000 });
-
-        channels[string] = selected.values.pop();
-        database.set(guild.id, { channels });
-
-        return await selected.update({
-          content: `${string} channel changed!`,
-          components: [],
-        });
-      } catch (e) {
-        return;
+    for (const option of this.data.options) {
+      const channel = interaction.options.getChannel(option.name);
+      if (channel) {
+        MODIFIED_CHANNELS.push(option.name);
+        channels[option.name] = channel.id;
       }
     }
 
-    const { welcome, ranking, logs, anime } = channels;
+    if (MODIFIED_CHANNELS.length) {
+      database.set(guild.id, { channels });
+      return interaction.reply({
+        ephemeral: true,
+        content: `Channels updated: ${MODIFIED_CHANNELS.join(", ")}`,
+      });
+    }
 
     const embed = {
       author: {
-        name: interaction.guild.name + "' configs",
-        icon_url: interaction.guild.iconURL(),
+        name: guild.name + "'s config",
+        icon_url: guild.iconURL(),
       },
-      color: config.color.int.primary,
+      color: client.config.color.int.primary,
       fields: [
-        { name: "Prefix", value: prefix },
-        { name: "Welcome channel", value: getChName(welcome) },
-        { name: "Ranking channel", value: getChName(ranking) },
-        { name: "Logs channel", value: getChName(logs) },
-        { name: "Anime channel", value: getChName(anime) },
+        { name: "Prefix", value: "```" + prefix + "```" },
+        { name: "Welcome channel", inline: true, value: getChannelName(channels.welcome_channel) },
+        { name: "Ranking channel", inline: true, value: getChannelName(channels.ranking_channel) },
+        { name: "Logs channel", inline: true, value: getChannelName(channels.logs_channel) },
+        { name: "Anime channel", inline: true, value: getChannelName(channels.anime_channel) },
       ],
     };
 
-    interaction.reply({
+    return interaction.reply({
       ephemeral: true,
       embeds: [embed],
     });
 
-    function getChName(id) {
+    function getChannelName(id) {
       let channel = guild.channels.cache.get(id);
 
       if (!channel) {
-        return "`undefined`";
+        return "```N/A```";
       } else {
-        return channel.name;
+        return "```" + channel.name + "```";
       }
     }
   }
