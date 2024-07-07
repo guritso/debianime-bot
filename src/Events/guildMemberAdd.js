@@ -5,7 +5,8 @@ export default class {
 
   async execute({ guild, user, client }) {
     const { database, config } = client;
-    const channel = guild.channels.cache.get(database.cache.get(guild.id)?.channels.welcome);
+    const channel = guild.channels.cache.get(database.cache.get(guild.id)?.channels.welcome_channel);
+
 
     const embed = {
       color: config.color.int.primary,

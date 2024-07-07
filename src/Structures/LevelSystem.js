@@ -24,7 +24,7 @@ export default class LevelSystem {
 
     if (experience >= this.getTarget(userData)) {
       const userLevel = this.addLevel(userData);
-      this.sendLevelUpMessage(client, guild, channels.ranking, id, name, userLevel);
+      this.sendLevelUpMessage(client, guild, channels.ranking_channel, id, name, userLevel);
     }
 
     return database.set(guild.id, { members });

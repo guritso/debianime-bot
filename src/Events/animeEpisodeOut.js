@@ -21,7 +21,7 @@ export default class {
     };
 
     client.guilds.cache.forEach((guild) => {
-      const channel = guild.channels.cache.get(database.cache.get(guild.id).channels.anime);
+      const channel = guild.channels.cache.get(database.cache.get(guild.id).channels.anime_channel);
       if (channel) {
         channel.send({ embeds: [embed] });
       }
