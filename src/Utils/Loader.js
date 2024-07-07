@@ -4,30 +4,27 @@ import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
 import AnimeRss from "../Structures/AnimeRss.js";
 
+const CLASS_NAMES = ["Database", "Actions", "Handler", "Events", "AnimeRss"];
+
 export default class Loader {
   constructor(client) {
     this.database = new Database(client);
-
-    client.database = this.database;
-
     this.actions = new Actions(client);
     this.handler = new Handler(client);
     this.events = new Events(client);
-    this.animeRss = new AnimeRss(client);
+    this.animerss = new AnimeRss(client);
+
+    client.database = this.database;
+    client.loader = this;
   }
 
   async execute() {
-    const tasks = [
-      { name: "Database", instance: this.database },
-      { name: "Actions", instance: this.actions },
-      { name: "Handler", instance: this.handler },
-      { name: "Events", instance: this.events },
-      { name: "AnimeRss", instance: this.animeRss },
-    ];
+    const tasks = CLASS_NAMES.map((name) => ({ name, instance: this[name.toLowerCase()] }));
 
-    for (let i = 0; i < tasks.length; i++) {
-      const task = tasks[i];
-      console.log(`↺ loading ${task.name}.......|${i + 1}/${tasks.length}|`);
+    for (const [index, task] of tasks.entries()) {
+      console.log(
+        `↺ loading ${task.name}.......|${index + 1}/${tasks.length}|`
+      );
       try {
         await task.instance.execute();
       } catch (error) {
