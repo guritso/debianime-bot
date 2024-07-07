@@ -57,19 +57,19 @@ export default class {
       });
     }
 
+    const FIELDS = [{ name: "Prefix", value: "```" + prefix + "```" }];
+
+    for (const channel of this.data.options) {
+      FIELDS.push({ name: channel.name, inline: true, value: getChannelName(channels[channel.name]) });
+    }
+
     const embed = {
       author: {
         name: guild.name + "'s config",
         icon_url: guild.iconURL(),
       },
       color: client.config.color.int.primary,
-      fields: [
-        { name: "Prefix", value: "```" + prefix + "```" },
-        { name: "Welcome channel", inline: true, value: getChannelName(channels.welcome_channel) },
-        { name: "Ranking channel", inline: true, value: getChannelName(channels.ranking_channel) },
-        { name: "Logs channel", inline: true, value: getChannelName(channels.logs_channel) },
-        { name: "Anime channel", inline: true, value: getChannelName(channels.anime_channel) },
-      ],
+      fields: FIELDS,
     };
 
     return interaction.reply({
