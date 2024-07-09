@@ -7,18 +7,21 @@ const FEED_URL = "https://www.livechart.me/feeds/episodes";
 export default class AnimeRss extends animeEvent {
   constructor(data) {
     super(data);
-    this.oldEpisodes = new Map();
+    (async () => {
+      const oldEpisodes = await this.fetchFeed();
+      this.oldEpisodes = new Map(
+        oldEpisodes.map((episode) => [episode.title, episode])
+      );
+    })();
   }
   async execute() {
-    const oldEpisodes = await this.fetchFeed();
-    this.oldEpisodes = new Map(oldEpisodes.map((episode) => [episode.title, episode]));
     console.log(`  • Fetched ${this.oldEpisodes.size} episodes`);
     // fetch each 1 minutes
     setInterval(async () => {
       const newEpisodes = await this.fetchFeed();
       for (const newEpisode of newEpisodes) {
-        // 2 seconds delay
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // 1 seconds and 300 milliseconds delay
+        await new Promise((resolve) => setTimeout(resolve, 1500));
         if (!this.oldEpisodes.has(newEpisode.title)) {
           this.oldEpisodes.set(newEpisode.title, newEpisode);
           super.triggerAnimeEpisodeOut(newEpisode);
@@ -33,7 +36,7 @@ export default class AnimeRss extends animeEvent {
         title: item.title,
         episode: item.title.split("#")[1],
         link: item.link,
-        pubDate: item.pubDate,
+        pubDate: item.pubDate.replace("+0000", "UTC"),
         image: item.enclosure.url.replace("small.jpg", "large.jpg"),
       }));
       return episodes;
@@ -41,5 +44,10 @@ export default class AnimeRss extends animeEvent {
       console.error(error);
       return [];
     }
+  }
+  async refreshAnimes() {
+    const animes = await this.fetchFeed();
+    this.oldEpisodes = new Map(animes.map((anime) => [anime.title, anime]));
+    return animes;
   }
 }
