@@ -8,20 +8,16 @@ export default class {
       permissionsUser: ["ManageMessages"],
     };
   }
+
   async execute(message, args, client) {
     const { database } = client;
-    const { mudae } = database.cache.get(message.guildId);
+    const guildId = message.guild.id;
+    const mudaeStatus = database.cache.get(guildId)?.mudae;
 
-    let status;
+    const newStatus = !mudaeStatus;
+    database.set(guildId, { mudae: newStatus });
 
-    if (!mudae) {
-      database.set(message.guild.id, { mudae: true });
-      status = "on :white_check_mark:";
-    } else {
-      database.set(message.guild.id, { mudae: false });
-      status = "off :x:";
-    }
-
-    message.reply("`React to Mudae: `" + status);
+    const statusMessage = newStatus ? "on :white_check_mark:" : "off :x:";
+    message.reply(`\`React to Mudae: ${statusMessage}\``);
   }
 }
