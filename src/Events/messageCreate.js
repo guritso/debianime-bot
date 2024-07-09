@@ -1,6 +1,7 @@
 import LevelSystem from "../Structures/LevelSystem.js";
 import Permission from "../Utils/Permission.js";
 import Mudae from "../Utils/Mudae.js";
+import Database from "../Collections/Database.js";
 
 export default class {
   constructor() {
@@ -9,7 +10,8 @@ export default class {
 
   async execute(message) {
     const { client, author, content, channel, guild } = message;
-    const { database, messageCommands, config } = client;
+    const { messageCommands, config } = client;
+    const database = new Database(client)
 
     await database.ensure(guild.id);
 
