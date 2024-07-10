@@ -38,7 +38,7 @@ export default class {
   async execute(interaction) {
     const { client, guild } = interaction;
     const { database } = client;
-    const { channels, prefix } = database.cache.get(guild.id);
+    const { channels, prefix, mudae } = database.cache.get(guild.id);
     const MODIFIED_CHANNELS = [];
 
     for (const option of this.data.options) {
@@ -51,16 +51,19 @@ export default class {
 
     if (MODIFIED_CHANNELS.length) {
       database.set(guild.id, { channels });
-      return interaction.reply({
-        ephemeral: true,
-        content: `Channels updated: ${MODIFIED_CHANNELS.join(", ")}`,
-      });
     }
 
-    const FIELDS = [{ name: "Prefix", value: "```" + prefix + "```" }];
+    const FIELDS = [
+      { name: "Prefix", inline: true, value: `\`\`\`${prefix}\`\`\`` },
+      { name: "Mudae", inline: true, value: `\`\`\`${mudae}\`\`\`` },
+    ];
 
     for (const channel of this.data.options) {
-      FIELDS.push({ name: channel.name, inline: true, value: getChannelName(channels[channel.name]) });
+      FIELDS.push({
+        name: channel.name,
+        inline: true,
+        value: getChannelName(channels[channel.name]),
+      });
     }
 
     const embed = {
@@ -73,6 +76,7 @@ export default class {
     };
 
     return interaction.reply({
+      content: `${MODIFIED_CHANNELS.length ? "Updated!" : ""}`,
       ephemeral: true,
       embeds: [embed],
     });
@@ -83,7 +87,7 @@ export default class {
       if (!channel) {
         return "```N/A```";
       } else {
-        return "```" + channel.name + "```";
+        return `\`\`\`${channel.name}\`\`\``;
       }
     }
   }
