@@ -1,14 +1,13 @@
 export default class {
   constructor() {
     this.data = {
-      guild: true,
       name: "tracemoe",
-      description: "Trace the anime scene",
+      description: "Search anime by image",
       type: 1,
       options: [
         {
           name: "image",
-          description: "The image to trace",
+          description: "The image to search",
           type: 11,
           required: true,
         },
