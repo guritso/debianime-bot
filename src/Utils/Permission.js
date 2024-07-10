@@ -5,28 +5,27 @@ export default class Permission {
     this.needed = null;
     this.missing = null;
   }
+
   async getMissing() {
     const { memberId, channel, needed } = this;
     if (!memberId || !channel || !needed) return;
-    const permissions = channel.permissionsFor(memberId);
 
-    needed.forEach((name) => {
-      if (!permissions.has(name)) {
-        if (!this.missing) this.missing = [];
-        this.missing.push(name);
-      }
-    });
+    const permissions = channel.permissionsFor(memberId);
+    this.missing = needed.filter(name => !permissions.has(name));
 
     return this.missing;
   }
+
   setMemberId(newMemberId) {
     this.memberId = newMemberId;
     return this;
   }
+
   setNeeded(newNeeded) {
     this.needed = newNeeded;
     return this;
   }
+
   setChannel(newChannel) {
     this.channel = newChannel;
     return this;
