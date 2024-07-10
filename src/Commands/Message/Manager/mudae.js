@@ -18,6 +18,6 @@ export default class {
     database.set(guildId, { mudae: newStatus });
 
     const statusMessage = newStatus ? "on :white_check_mark:" : "off :x:";
-    message.reply(`\`React to Mudae: ${statusMessage}\``);
+    message.reply(`\`React to Mudae: \`${statusMessage}`);
   }
 }
