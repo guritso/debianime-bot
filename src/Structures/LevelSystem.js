@@ -1,5 +1,8 @@
-export default class LevelSystem {
+import LevelEvent from "../Utils/LevelEvent.js";
+
+export default class LevelSystem extends LevelEvent {
   constructor(message) {
+    super(message.client);
     this.body = {
       id: message.author.id,
       name: message.author.username,
@@ -10,10 +13,9 @@ export default class LevelSystem {
   }
 
   async execute(database) {
-    const { guild, client } = this.message;
-    const { id, name } = this.body;
-    const { members, channels } = database.cache.get(guild.id);
-    const userData = members.find((user) => user.id == id);
+    const guild = this.message.guild;
+    const { members } = database.cache.get(guild.id);
+    const userData = members.find((user) => user.id == this.body.id);
 
     if (!userData) {
       members.push(this.body);
@@ -23,8 +25,8 @@ export default class LevelSystem {
     const experience = this.addExperience(userData);
 
     if (experience >= this.getTarget(userData)) {
-      const userLevel = this.addLevel(userData);
-      this.sendLevelUpMessage(client, guild, channels.ranking_channel, id, name, userLevel);
+      this.addLevel(userData);
+      super.triggerUserLevelUp(userData, guild);
     }
 
     return database.set(guild.id, { members });
@@ -44,21 +46,5 @@ export default class LevelSystem {
     user.level++;
     user.experience = 0;
     return user.level;
-  }
-
-  async sendLevelUpMessage(client, guild, channelId, userId, userName, userLevel) {
-    const embed = {
-      title: "Level Up",
-      color: client.config.color.int.primary,
-      description: `${userName} has reached level **${userLevel}**!`,
-    };
-
-    const channel = guild.channels.cache.get(channelId);
-    if (channel) {
-      const permissions = channel.permissionsFor(client.user.id);
-      if (permissions.has(["EmbedLinks", "SendMessages"])) {
-        await channel.send({ content: `<@${userId}>`, embeds: [embed] });
-      }
-    }
   }
 }
