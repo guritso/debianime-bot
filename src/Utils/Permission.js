@@ -13,7 +13,7 @@ export default class Permission {
     const permissions = channel.permissionsFor(memberId);
     this.missing = needed.filter(name => !permissions.has(name));
 
-    return this.missing;
+    return this.missing.length ? this.missing : false;
   }
 
   setMemberId(newMemberId) {
