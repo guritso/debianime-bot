@@ -1,7 +1,6 @@
 import LevelSystem from "../Structures/LevelSystem.js";
 import Permission from "../Utils/Permission.js";
 import Mudae from "../Utils/Mudae.js";
-import Database from "../Collections/Database.js";
 
 export default class {
   constructor() {
@@ -10,13 +9,11 @@ export default class {
 
   async execute(message) {
     const { client, author, content, channel, guild } = message;
-    const { messageCommands, config } = client;
-    const database = new Database(client)
+    const { messageCommands, config, database } = client;
 
     await database.ensure(guild.id);
 
-    const mudae = new Mudae();
-    mudae.react(message);
+    new Mudae().react(message);
 
     const { prefix } = database.cache.get(guild.id);
 
@@ -26,8 +23,7 @@ export default class {
       return message.reply("> My prefix is: " + prefix);
     }
 
-    const levelSystem = new LevelSystem(message);
-    levelSystem.execute(database);
+    new LevelSystem(message).execute(database);
 
     if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 
@@ -66,7 +62,14 @@ export default class {
     command.execute(message, args, client);
   }
 
-  async checkPermissions(memberId, neededPermissions, channel, color, footerText, message) {
+  async checkPermissions(
+    memberId,
+    neededPermissions,
+    channel,
+    color,
+    footerText,
+    message
+  ) {
     const permission = new Permission()
       .setNeeded(neededPermissions)
       .setMemberId(memberId)
