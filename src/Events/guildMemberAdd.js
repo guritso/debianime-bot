@@ -1,3 +1,5 @@
+import Permission from "../Utils/Permission.js";
+
 export default class {
   constructor() {
     this.once = false;
