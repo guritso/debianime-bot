@@ -21,6 +21,20 @@ export default class {
               name: "channel",
               description: "select the channel (optional)",
               type: 7,
+              required: false,
+            },
+          ],
+        },
+        {
+          name: "delete",
+          description: "delete a channel",
+          type: 1,
+          options: [
+            {
+              name: "channel",
+              description: "select the channel",
+              required: true,
+              type: 7,
             },
           ],
         },
@@ -55,6 +69,24 @@ export default class {
 
         interaction.reply({
           embeds: [embed],
+          ephemeral: true,
+        });
+      },
+      delete: async () => {
+        const giveChannel = interaction.options.getChannel("channel");
+        const channel = giveChannel;
+        const oldName = channel.name;
+
+        if (!channel.manageable)
+          return interaction.reply({
+            content: `> I don't have permission in ${oldName}`,
+            ephemeral: true,
+          });
+
+        await channel.delete();
+
+        interaction.reply({
+          content: `> Channel ${oldName} deleted`,
           ephemeral: true,
         });
       },
