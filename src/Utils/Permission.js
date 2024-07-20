@@ -11,7 +11,7 @@ export default class Permission {
     if (!memberId || !channel || !needed) return;
 
     const permissions = channel.permissionsFor(memberId);
-    this.missing = needed.filter(name => !permissions.has(name));
+    this.missing = needed.filter((name) => !permissions.has(name));
 
     return this.missing.length ? this.missing : false;
   }

@@ -19,7 +19,10 @@ export default class Loader {
   }
 
   async execute() {
-    const tasks = CLASS_NAMES.map((name) => ({ name, instance: this[name.toLowerCase()] }));
+    const tasks = CLASS_NAMES.map((name) => ({
+      name,
+      instance: this[name.toLowerCase()],
+    }));
 
     for (const [index, task] of tasks.entries()) {
       console.log(

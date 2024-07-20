@@ -9,7 +9,7 @@ export default class {
     const { client, commandName } = interaction;
     const commands = client.interactionCommands;
     const command = commands.get(commandName);
-    
+
     await client.database.ensure(interaction.guild.id);
 
     if (!command) return;
@@ -28,7 +28,14 @@ export default class {
     command.execute(interaction, client);
   }
 
-  async checkPermissions(memberId, neededPermissions, channel, color, footerText, interaction) {
+  async checkPermissions(
+    memberId,
+    neededPermissions,
+    channel,
+    color,
+    footerText,
+    interaction
+  ) {
     const permission = new Permission()
       .setNeeded(neededPermissions)
       .setMemberId(memberId)

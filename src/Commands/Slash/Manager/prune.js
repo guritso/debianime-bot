@@ -33,7 +33,9 @@ export default class {
       return interaction.editReply(invalid);
     }
 
-    const messages = await interaction.channel.bulkDelete(ammount).catch(() => {});
+    const messages = await interaction.channel
+      .bulkDelete(ammount)
+      .catch(() => {});
 
     if (!messages) {
       return interaction.editReply(error);

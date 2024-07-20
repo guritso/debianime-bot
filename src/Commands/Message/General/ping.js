@@ -5,7 +5,7 @@ export default class {
       description: "Show api ping and bot ping.",
       aliases: ["ms"],
       permissionsBot: ["EmbedLinks", "SendMessages"],
-    }
+    };
   }
   async execute(message, args, client) {
     const bot = Date.now() - message.createdTimestamp;

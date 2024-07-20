@@ -7,7 +7,8 @@ export default class UserLevelUp {
 
   async execute(data) {
     const { client, guild, user } = data;
-    const CHANNEL_ID = client.database.cache.get(guild.id)?.channels?.ranking_channel;
+    const CHANNEL_ID = client.database.cache.get(guild.id)?.channels
+      ?.ranking_channel;
     const channel = guild.channels.cache.get(CHANNEL_ID);
 
     if (!channel) return;

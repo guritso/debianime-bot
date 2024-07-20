@@ -10,8 +10,8 @@ export default class {
   }
   async execute(message, args, client) {
     let { channel } = message;
-    
-    if(!args.length) return;
+
+    if (!args.length) return;
 
     if (args[0].toLowerCase() == "channel") {
       args.shift();
@@ -34,7 +34,7 @@ export default class {
     if (!args.length) {
       return message.member.send("Cannot send a empty message");
     }
-    
+
     channel.send(args.join(" "));
   }
 }

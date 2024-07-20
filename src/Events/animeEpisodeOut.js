@@ -27,7 +27,9 @@ export default class {
     };
 
     client.guilds.cache.forEach(async (guild) => {
-      const channel = guild.channels.cache.get(database.cache.get(guild.id).channels.anime_channel);
+      const channel = guild.channels.cache.get(
+        database.cache.get(guild.id).channels.anime_channel
+      );
 
       permission.setChannel(channel);
 
