@@ -2,7 +2,6 @@ import animeEvent from "../Utils/AnimeEvent.js";
 import RSSParser from "rss-parser";
 
 const parser = new RSSParser();
-const FEED_URL = "https://www.livechart.me/feeds/episodes";
 
 export default class AnimeRss extends animeEvent {
   constructor(data) {
@@ -30,6 +29,8 @@ export default class AnimeRss extends animeEvent {
     }, 1 * 60 * 1000);
   }
   async fetchFeed() {
+    const FEED_URL = this.client.config.animeRss.url;
+
     try {
       const feed = await parser.parseURL(FEED_URL);
       const episodes = feed.items.map((item) => ({

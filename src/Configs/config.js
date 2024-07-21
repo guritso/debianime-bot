@@ -2,7 +2,7 @@ import "dotenv/config";
 
 const bot = {
   prefix: ".",
-  token: process.env.TOKEN,
+  token: process.env.BOT_TOKEN,
   id: "1054588440143986788",
 };
 
@@ -14,6 +14,10 @@ const mongo = {
   uri: process.env.MONGO_DB_URI,
   dbName: "DebiAnimeDB",
   collection: "guilds",
+};
+
+const animeRss = {
+  url: "https://www.livechart.me/feeds/episodes",
 };
 
 const color = {
@@ -35,4 +39,4 @@ const color = {
   },
 };
 
-export default { bot, guild, mongo, color };
+export default { bot, guild, mongo, color, animeRss };
