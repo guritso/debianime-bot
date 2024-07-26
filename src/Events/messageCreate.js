@@ -1,6 +1,7 @@
 import LevelSystem from "../Structures/LevelSystem.js";
 import Permission from "../Utils/Permission.js";
 import Mudae from "../Utils/Mudae.js";
+import OllamaAI from "../Structures/OllamaAI.js";
 
 export default class {
   constructor() {
@@ -19,11 +20,12 @@ export default class {
 
     if (author.bot) return;
 
-    if (message.mentions.users.has(client.user.id)) {
-      return message.reply("> My prefix is: " + prefix);
+    new LevelSystem(message).execute(database);
+
+    if (message.mentions.users.has(client.user.id) || channel.isThread()) {
+      return client.ollamaai.chat(author.username, message);
     }
 
-    new LevelSystem(message).execute(database);
 
     if (!content.toLowerCase().startsWith(prefix.toLowerCase())) return;
 

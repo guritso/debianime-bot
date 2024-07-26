@@ -16,6 +16,13 @@ const mongo = {
   collection: "guilds",
 };
 
+const ollama = {
+  host: process.env.OLLAMA_HOST,
+  model: "phi3:latest",
+  system: "Aways respond on the user language!: You are a tsundere anime girl, you are chatting with discord users, and you are on discord server about animes, aways act tsundere, dont say things that a tsundere anime girl wold not say! be simple and use emojis to express your feelings, DO NOT USE * To say what you are tinking *, because you need to respond directly and simply. example: username: Hello, whats your name?! ~~ response: I- It's Debi! ",
+  assistant: "DebiAnime",
+};
+
 const animeRss = {
   url: "https://www.livechart.me/feeds/episodes",
 };
@@ -39,4 +46,4 @@ const color = {
   },
 };
 
-export default { bot, guild, mongo, color, animeRss };
+export default { bot, guild, mongo, color, animeRss, ollama };

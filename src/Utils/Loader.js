@@ -3,8 +3,9 @@ import Actions from "../Collections/Actions.js";
 import Handler from "../Structures/Handler.js";
 import Events from "../Structures/Events.js";
 import AnimeRss from "../Structures/AnimeRss.js";
+import OllamaAI from "../Structures/OllamaAI.js";
 
-const CLASS_NAMES = ["Database", "Actions", "Handler", "Events", "AnimeRss"];
+const CLASS_NAMES = ["Database", "Actions", "Handler", "Events", "AnimeRss", "OllamaAI"];
 
 export default class Loader {
   constructor(client) {
@@ -13,7 +14,9 @@ export default class Loader {
     this.handler = new Handler(client);
     this.events = new Events(client);
     this.animerss = new AnimeRss(client);
+    this.ollamaai = new OllamaAI(client);
 
+    client.ollamaai = this.ollamaai;
     client.database = this.database;
     client.loader = this;
   }
@@ -24,10 +27,10 @@ export default class Loader {
       instance: this[name.toLowerCase()],
     }));
 
+    const tasksLength = tasks.length + 1;
+
     for (const [index, task] of tasks.entries()) {
-      console.log(
-        `↺ loading ${task.name}.......|${index + 1}/${tasks.length}|`
-      );
+      console.log(`↺ loading ${task.name}.......|${index + 1}/${tasksLength}|`);
       try {
         await task.instance.execute();
       } catch (error) {
@@ -35,6 +38,6 @@ export default class Loader {
         return;
       }
     }
-    console.log(`↺ loading Client.........|${tasks.length}/${tasks.length}|`);
+    console.log(`↺ loading Client.........|${tasksLength}/${tasksLength}|`);
   }
 }
