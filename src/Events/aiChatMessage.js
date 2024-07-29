@@ -3,7 +3,7 @@ export default class {
     this.once = false;
   }
 
-  async execute({ client, user, message, data }) {
+  async execute({ client, message, response }) {
     let MSG_CONTENT = "";
     const RELOADING_EMOJI = "<a:reloading:1266901077496827962>";
 
@@ -14,7 +14,7 @@ export default class {
     }, 1000);
 
     try {
-      for await (const chunk of data) {
+      for await (const chunk of response) {
         MSG_CONTENT = MSG_CONTENT.replace(RELOADING_EMOJI, "");
         MSG_CONTENT += chunk.message.content + RELOADING_EMOJI;
       }

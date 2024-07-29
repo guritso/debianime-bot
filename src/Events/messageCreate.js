@@ -23,7 +23,7 @@ export default class {
     new LevelSystem(message).execute(database);
 
     if (message.mentions.users.has(client.user.id) || channel.isThread()) {
-      return client.ollamaai.chat(author.username, message);
+      return client.ollamaai.chat(message);
     }
 
 

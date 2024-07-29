@@ -45,14 +45,14 @@ export default class OllamaAI extends Ollama {
       }
     }
   }
-  async chat(username, message) {
+  async chat(message) {
     const ollamaEvent = new OllamaEvent(message.client);
 
     message.channel.sendTyping().catch(() => {});
 
     const userTemplate = {
       role: "user",
-      content: `${username}: ${message.content}`,
+      content: `${message.author.username}: ${message.content}`,
     };
 
     this.messages.push(userTemplate);
@@ -69,7 +69,7 @@ export default class OllamaAI extends Ollama {
         return message.channel.send("Something went wrong, please try again later...").catch(() => {});
       });
 
-    ollamaEvent.triggerAiChatMessage(username, message, response);
+    ollamaEvent.triggerAiChatMessage(message, response);
   }
   async setModel(model) {
     this.model = model;
