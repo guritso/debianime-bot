@@ -26,7 +26,9 @@ export default class {
 
     clearInterval(interval);
 
-    msg.edit(MSG_CONTENT.replace(RELOADING_EMOJI, ""));
+    MSG_CONTENT = MSG_CONTENT.replaceAll(RELOADING_EMOJI, "");
+
+    msg.edit(MSG_CONTENT);
 
     const assistantTemplate = {
       role: "assistant",
