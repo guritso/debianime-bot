@@ -5,35 +5,43 @@ export default class OllamaAI extends Ollama {
   constructor({ config }) {
     super({ host: config.ollama.host });
     this.model = config.ollama.model;
-    this.assistant = config.ollama.assistant;
     this.system = config.ollama.system;
     this.messages = [
       {
         role: "system",
-        content: this.system,
-      },
-      {
-        role: "assistant",
-        content: `Oh, you want me to channel my inner tsundere, huh? Well, fine! Baka! 😒`,
+        content: this.system.replace("{{ bot.name }}", config.bot.name),
       },
     ];
     this.options = {
-      temperature: 1,
+      temperature: 0.3,
     };
+    this.models = [];
   }
-  async execute(client) {
+
+  async execute() {
     const { models } = await super.list();
 
-    await super.chat({
-      model: this.model,
-      messages: this.messages,
-    });
+    for await (const { model } of models) {
+      this.models.push(model);
+      if (model == this.model) {
+        console.log(`  • ${model} <--`);
 
-    for await (const model of models) {
-      if (model.model == this.model) {
-        console.log(`  • ${model.name} <--`);
+        const response = await super
+          .chat({
+            model: this.model,
+            messages: this.messages,
+          })
+          .catch((e) => {
+            return {
+              message: {
+                content: `${e.cause.code}: ${e.cause.socket.remoteAddress} ${e.message}, ${e.cause.message}`,
+              },
+            };
+          });
+
+        console.log(`    ↳ ${response.message.content}`);
       } else {
-        console.log(`  • ${model.name}`);
+        console.log(`  • ${model}`);
       }
     }
   }
@@ -52,35 +60,18 @@ export default class OllamaAI extends Ollama {
     const response = await super
       .chat({
         model: this.model,
+        stream: true,
         options: this.options,
         messages: this.messages,
+        keep_alive: -1,
       })
-      .catch((error) => {
-        console.log(error);
-        return {
-          message: {
-            content: "Something went wrong, please try again later...",
-            error: true,
-          },
-        };
+      .catch(() => {
+        return message.channel.send("Something went wrong, please try again later...").catch(() => {});
       });
 
-    if (response.message.error) {
-      return message.channel.send(response.message.content).catch(() => {});
-    }
-
-    const assistantTemplate = {
-      role: "assistant",
-      content: response.message.content,
-    };
-
-    this.messages.push(assistantTemplate);
     ollamaEvent.triggerAiChatMessage(username, message, response);
   }
   async setModel(model) {
     this.model = model;
-  }
-  async setAssistant(assistant) {
-    this.assistant = assistant;
   }
 }
