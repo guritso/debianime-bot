@@ -65,9 +65,7 @@ export default class OllamaAI extends Ollama {
         messages: this.messages,
         keep_alive: -1,
       })
-      .catch(() => {
-        return message.channel.send("Something went wrong, please try again later...").catch(() => {});
-      });
+      .catch(() => {});
 
     ollamaEvent.triggerAiChatMessage(message, response);
   }

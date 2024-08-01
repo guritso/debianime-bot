@@ -20,8 +20,7 @@ export default class {
       }
     } catch (error) {
       clearInterval(interval);
-
-      return msg.edit("A error ocurred, try again later.");
+      return msg.edit("Something went wrong, try again later...");
     }
 
     clearInterval(interval);
