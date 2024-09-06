@@ -3,6 +3,17 @@ import RSSParser from "rss-parser";
 
 const parser = new RSSParser();
 
+const setPresence = (client, title) => {
+  client.presence.set({
+    activities: [
+      {
+        name: title,
+        type: 3,
+      },
+    ],
+  });
+};
+
 export default class AnimeRss extends animeEvent {
   constructor(data) {
     super(data);
@@ -24,6 +35,7 @@ export default class AnimeRss extends animeEvent {
         if (!this.oldEpisodes.has(newEpisode.title)) {
           this.oldEpisodes.set(newEpisode.title, newEpisode);
           super.triggerAnimeEpisodeOut(newEpisode);
+          setPresence(this.client, newEpisode.title);
         }
       }
     }, 1 * 60 * 1000);
