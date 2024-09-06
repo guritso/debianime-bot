@@ -36,7 +36,7 @@ export default class {
       const missing = await permission.getMissing();
 
       if (channel && !missing) {
-        channel.send({ embeds: [embed] });
+        channel.send({ content:"", embeds: [embed] });
       }
     });
   }

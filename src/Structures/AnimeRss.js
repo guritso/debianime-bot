@@ -47,7 +47,7 @@ export default class AnimeRss extends animeEvent {
       const feed = await parser.parseURL(FEED_URL);
       const episodes = feed.items.map((item) => ({
         title: item.title,
-        episode: item.title.split("#")[1],
+        episode: item.title.includes("#") ? item.title.split("#")[1] : "unknown",
         link: item.link,
         pubDate: item.pubDate.replace("+0000", "UTC"),
         image: item.enclosure.url.replace("small.jpg", "large.jpg"),
