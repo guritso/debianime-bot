@@ -7,7 +7,7 @@ const setPresence = (client, title) => {
   client.presence.set({
     activities: [
       {
-        name: title,
+        name: title.split("#")[0],
         type: 3,
       },
     ],
