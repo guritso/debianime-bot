@@ -14,4 +14,3 @@ export default class Mudae {
 function isMudaeRoll(msg) {
   return msg.author.username === "Mudae" && msg.embeds.length && !msg.components.length;
 }
-// fix: not re
