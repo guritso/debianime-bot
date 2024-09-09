@@ -11,7 +11,7 @@
     "rss-parser": "^3.13.0"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node --no-warnings index.js"
   },
   "repository": {
     "type": "git",
