@@ -23,7 +23,7 @@ DebiAnime Bot is a versatile Discord bot developed in ES6, designed to enhance t
 
 1. Clone the repository:
    ```
-   git clone https://github.com/GuriZenit/debianime-bot.git
+   git clone https://github.com/guritso/debianime-bot.git
    ```
 
 2. Install dependencies:
@@ -64,5 +64,5 @@ GuriZenit
 
 ## Links
 
-- [GitHub Repository](https://github.com/GuriZenit/debianime-bot)
-- [Report Issues](https://github.com/GuriZenit/debianime-bot/issues)
+- [GitHub Repository](https://github.com/guritso/debianime-bot)
+- [Report Issues](https://github.com/guritso/debianime-bot/issues)

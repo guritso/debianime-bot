@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GuriZenit/debianime-bot.git"
+    "url": "git+https://github.com/guritso/debianime-bot.git"
   },
   "keywords": [
     "discord",
@@ -23,11 +23,11 @@
     "ES6",
     "v14"
   ],
-  "author": "GuriZenit",
+  "author": "GuriTso",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GuriZenit/debianime-bot/issues"
+    "url": "https://github.com/guritso/debianime-bot/issues"
   },
-  "homepage": "https://github.com/GuriZenit/debianime-bot#readme",
+  "homepage": "https://github.com/guritso/debianime-bot#readme",
   "type": "module"
 }
