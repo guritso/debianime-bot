@@ -3,7 +3,7 @@
   "description": "A bot for the DebiAnime discord server",
   "version": "1.7.5",
   "main": "index.js",
-  "packageManager": "yarn@3.3.0",
+  "packageManager": "yarn@4.5.0",
   "dependencies": {
     "@keyv/mongo": "^3.0.1",
     "discord.js": "^14.16.2",
