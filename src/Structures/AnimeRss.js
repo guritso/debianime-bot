@@ -24,7 +24,7 @@ export default class AnimeRss extends animeEvent {
       );
     })();
   }
-  async execute() {
+  execute() {
     console.log(`  • Fetched ${this.oldEpisodes.size} episodes`);
     // fetch each 1 minutes
     setInterval(async () => {
