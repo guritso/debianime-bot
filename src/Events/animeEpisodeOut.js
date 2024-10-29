@@ -5,7 +5,7 @@ export default class {
     this.once = false;
   }
 
-  execute({ client, anime }) {
+  static execute({ client, anime }) {
     const { title, link, episode, image, pubDate } = anime;
     const { database, config } = client;
 
@@ -36,11 +36,9 @@ export default class {
       const missing = await permission.getMissing();
 
       if (channel && !missing) {
-        try {
-          channel.send({ content: "", embeds: [embed] });
-        } catch (error) {
+        channel.send({ content: "", embeds: [embed] }).catch((error) => {
           console.error(error);
-        }
+        });
       }
     });
   }
