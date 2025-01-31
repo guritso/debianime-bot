@@ -5,7 +5,7 @@ export default class {
     this.once = false;
   }
 
-  static execute({ client, anime }) {
+  async execute({ client, anime }) {
     const { title, link, episode, image, pubDate } = anime;
     const { database, config } = client;
 
