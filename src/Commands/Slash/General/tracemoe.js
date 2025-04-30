@@ -30,59 +30,59 @@ export default class {
         }
       );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    const result = data?.result?.shift();
+      const result = data?.result?.shift();
 
-    if (!result) {
+      if (!result) {
         return interaction.editReply({ content: "No result found" });
       }
+
+      const embed = {
+        title: result.filename,
+        url: result.video,
+        color: interaction.client.config.color.int.primary,
+        author: {
+          name: "Anilist",
+          icon_url: "https://anilist.co/img/icons/apple-touch-icon.png",
+          url: `https://anilist.co/anime/${result.anilist}`,
+        },
+        image: {
+          url: result.image,
+        },
+        fields: [
+          {
+            name: "EPISODE",
+            inline: true,
+            value: `\`\`\`${result.episode}\`\`\``,
+          },
+          {
+            name: "FROM",
+            inline: true,
+            value: `\`\`\`${formatSeconds(result.from)}\`\`\``,
+          },
+          {
+            name: "TO",
+            inline: true,
+            value: `\`\`\`${formatSeconds(result.to)}\`\`\``,
+          },
+          {
+            name: "SIMILARITY",
+            inline: true,
+            value: `\`\`\`${result.similarity}%\`\`\``,
+          },
+        ],
+        footer: {
+          text: "Powered by trace.moe",
+        },
+      };
+
+      interaction.editReply({ embeds: [embed] });
     } catch (error) {
       return interaction.editReply({
         content: "Error fetching trace.moe api",
       });
     }
-
-    const embed = {
-      title: result.filename,
-      url: result.video,
-      color: interaction.client.config.color.int.primary,
-      author: {
-        name: "Anilist",
-        icon_url: "https://anilist.co/img/icons/apple-touch-icon.png",
-        url: `https://anilist.co/anime/${result.anilist}`,
-      },
-      image: {
-        url: result.image,
-      },
-      fields: [
-        {
-          name: "EPISODE",
-          inline: true,
-          value: `\`\`\`${result.episode}\`\`\``,
-        },
-        {
-          name: "FROM",
-          inline: true,
-          value: `\`\`\`${formatSeconds(result.from)}\`\`\``,
-        },
-        {
-          name: "TO",
-          inline: true,
-          value: `\`\`\`${formatSeconds(result.to)}\`\`\``,
-        },
-        {
-          name: "SIMILARITY",
-          inline: true,
-          value: `\`\`\`${result.similarity}%\`\`\``,
-        },
-      ],
-      footer: {
-        text: "Powered by trace.moe",
-      },
-    };
-    interaction.editReply({ embeds: [embed] });
-
     function formatSeconds(seconds) {
       const min = Math.floor(Math.round(seconds) / 60);
       const sec = Math.floor(Math.round(seconds) % 60);
