@@ -19,14 +19,28 @@ export default class {
     interaction.deferReply();
 
     const image = interaction.options.getAttachment("image");
-    const response = await fetch(
-      `https://api.trace.moe/search?url=${encodeURIComponent(image.url)}`
-    ).then((e) => e.json());
 
-    const result = response?.result?.shift();
+    try {
+      const response = await fetch(
+        `https://api.trace.moe/search?url=${encodeURIComponent(image.url)}`,
+        {
+          headers: {
+            "user-agent": "debianime-bot",
+          },
+        }
+      );
+
+    const data = await response.json();
+
+    const result = data?.result?.shift();
 
     if (!result) {
-      return interaction.editReply({ content: "No result found" });
+        return interaction.editReply({ content: "No result found" });
+      }
+    } catch (error) {
+      return interaction.editReply({
+        content: "Error fetching trace.moe api",
+      });
     }
 
     const embed = {
