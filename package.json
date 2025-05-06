@@ -6,7 +6,7 @@
   "packageManager": "yarn@4.9.1",
   "dependencies": {
     "@keyv/mongo": "^3.0.1",
-    "discord.js": "^14.19.1",
+    "discord.js": "^14.19.3",
     "dotenv": "^16.5.0",
     "rss-parser": "^3.13.0"
   },
