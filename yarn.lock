@@ -5,9 +5,9 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@discordjs/builders@npm:^1.11.1":
-  version: 1.11.1
-  resolution: "@discordjs/builders@npm:1.11.1"
+"@discordjs/builders@npm:^1.11.2":
+  version: 1.11.2
+  resolution: "@discordjs/builders@npm:1.11.2"
   dependencies:
     "@discordjs/formatters": "npm:^0.6.1"
     "@discordjs/util": "npm:^1.1.1"
@@ -16,7 +16,7 @@ __metadata:
     fast-deep-equal: "npm:^3.1.3"
     ts-mixer: "npm:^6.0.4"
     tslib: "npm:^2.6.3"
-  checksum: 10/bb20b2fb2c700af4bbb20862227cc83a9b58fa7fd2738187b704432e0fcf926eaf5dbbaee2fb74849843669aecc38b5a1ecbda1ec4028bf18cf82a7a6b8e45ac
+  checksum: 10/b3e76c12c170d6719c4ba3c755e81a0a58d93e9ed260fcd435990411c355c06f7984f1170d4332f544db09ee8a2bcea3421f63c46e1f84f8e62eee757dfa2659
   languageName: node
   linkType: hard
 
@@ -207,7 +207,7 @@ __metadata:
   resolution: "debianime-bot@workspace:."
   dependencies:
     "@keyv/mongo": "npm:^3.0.1"
-    discord.js: "npm:^14.19.1"
+    discord.js: "npm:^14.19.3"
     dotenv: "npm:^16.5.0"
     rss-parser: "npm:^3.13.0"
   languageName: unknown
@@ -220,11 +220,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.19.1":
-  version: 14.19.1
-  resolution: "discord.js@npm:14.19.1"
+"discord.js@npm:^14.19.3":
+  version: 14.19.3
+  resolution: "discord.js@npm:14.19.3"
   dependencies:
-    "@discordjs/builders": "npm:^1.11.1"
+    "@discordjs/builders": "npm:^1.11.2"
     "@discordjs/collection": "npm:1.5.3"
     "@discordjs/formatters": "npm:^0.6.1"
     "@discordjs/rest": "npm:^2.5.0"
@@ -237,7 +237,7 @@ __metadata:
     magic-bytes.js: "npm:^1.10.0"
     tslib: "npm:^2.6.3"
     undici: "npm:6.21.1"
-  checksum: 10/da25a424d1a0f812a72be8c08110db66ca4b2febe0e50b7011874b60b2fdfb8ef9fc0c2af25e23add530c456a929c92dcad403b56c7d09c920f016e39ac875ec
+  checksum: 10/c9fd9deb4df8e8797da46d2d75c9eeb02fd55d99043b70c8846996b6f262be743cf6cc52033ed5890a2ceac53537ce9048d3abbc8a358707d5122df4fef874eb
   languageName: node
   linkType: hard
 
