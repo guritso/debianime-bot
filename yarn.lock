@@ -98,12 +98,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keyv/mongo@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "@keyv/mongo@npm:3.0.1"
+"@keyv/mongo@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "@keyv/mongo@npm:3.0.2"
   dependencies:
     mongodb: "npm:^6.8.0"
-  checksum: 10/ca63a1b19effc153a30ad32417e37db47bc0be9cd7f8c7876737e8d61ff25dd01b97f3590ba92a132ce40496f994b5bb3d2fb2d92721cb26fd93daa2586b4369
+  checksum: 10/9b043daa48cec28eb02d1e9538297559e7642658c414baaa7607ad77564f0ffd8f88fda46aad95b0337fc176aae1be769754f4848292c33d334ea5bf02147474
   languageName: node
   linkType: hard
 
@@ -206,7 +206,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "debianime-bot@workspace:."
   dependencies:
-    "@keyv/mongo": "npm:^3.0.1"
+    "@keyv/mongo": "npm:^3.0.2"
     discord.js: "npm:^14.19.3"
     dotenv: "npm:^16.5.0"
     rss-parser: "npm:^3.13.0"
