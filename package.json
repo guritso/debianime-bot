@@ -7,7 +7,7 @@
   "dependencies": {
     "@keyv/mongo": "^3.0.4",
     "discord.js": "^14.22.1",
-    "dotenv": "^17.2.2",
+    "dotenv": "^17.2.3",
     "rss-parser": "^3.13.0"
   },
   "scripts": {
