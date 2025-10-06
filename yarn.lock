@@ -115,14 +115,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@keyv/mongo@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "@keyv/mongo@npm:3.0.4"
+"@keyv/mongo@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "@keyv/mongo@npm:3.0.5"
   dependencies:
     mongodb: "npm:^6.20.0"
   peerDependencies:
     keyv: ^5.5.3
-  checksum: 10/725c306e697a7176d552e099492a05259286b4ce7a938c690884ee7624d1faa1610d5dd0f40b7e3d6a47c124b56bb742bb22c91f2b6d32d2dd3b90fa5e32aefd
+  checksum: 10/b3cdaa3ffc8be2e3a3f8f807300f43a9f884fc29c8cd46b41d7cf5cad5069def0deba0399cc5b503441476506d4cab69c14b17b4259d1ee5a34e11430e46a50e
   languageName: node
   linkType: hard
 
@@ -225,7 +225,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "debianime-bot@workspace:."
   dependencies:
-    "@keyv/mongo": "npm:^3.0.4"
+    "@keyv/mongo": "npm:^3.0.5"
     discord.js: "npm:^14.22.1"
     dotenv: "npm:^17.2.2"
     rss-parser: "npm:^3.13.0"
