@@ -226,7 +226,7 @@ __metadata:
   resolution: "debianime-bot@workspace:."
   dependencies:
     "@keyv/mongo": "npm:^3.0.5"
-    discord.js: "npm:^14.24.1"
+    discord.js: "npm:^14.24.2"
     dotenv: "npm:^17.2.3"
     rss-parser: "npm:^3.13.0"
   languageName: unknown
@@ -253,9 +253,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord.js@npm:^14.24.1":
-  version: 14.24.1
-  resolution: "discord.js@npm:14.24.1"
+"discord.js@npm:^14.24.2":
+  version: 14.24.2
+  resolution: "discord.js@npm:14.24.2"
   dependencies:
     "@discordjs/builders": "npm:^1.13.0"
     "@discordjs/collection": "npm:1.5.3"
@@ -270,7 +270,7 @@ __metadata:
     magic-bytes.js: "npm:^1.10.0"
     tslib: "npm:^2.6.3"
     undici: "npm:6.21.3"
-  checksum: 10/9b9f4a02329bed8dee0e2d3529884f28f7d52936b26a3ce866f6df203259600a43dcf8bdd183a6a46d25517cf1104890c99d8588ba84b6a1e39fc602d2609d2e
+  checksum: 10/5f43ad11c7435e677f620f68acb1d438352ca375dfbab33136ff521c19cb377d42c5560a23defd4d742833f032cd85d1e9b3368d92a4f6c0b299975764d47ee7
   languageName: node
   linkType: hard
 
