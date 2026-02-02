@@ -19,9 +19,9 @@ export default class {
 
     if (author.bot) return;
 
-    if (message.mentions.users.has(client.user.id)) {
-      return message.reply("> My prefix is: " + prefix);
-    }
+    // if (message.mentions.users.has(client.user.id)) {
+    //   return message.reply("> My prefix is: " + prefix);
+    // }
 
     new LevelSystem(message).execute(database);
 
