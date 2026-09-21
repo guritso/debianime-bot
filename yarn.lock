@@ -243,7 +243,7 @@ __metadata:
   dependencies:
     "@keyv/mongo": "npm:^3.1.0"
     discord.js: "npm:^14.26.4"
-    dotenv: "npm:^17.4.2"
+    dotenv: "npm:^18.0.0"
     rss-parser: "npm:^3.13.0"
   languageName: unknown
   linkType: soft
@@ -290,10 +290,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^17.4.2":
-  version: 17.4.2
-  resolution: "dotenv@npm:17.4.2"
-  checksum: 10/ca1b6f54d58e39914901e1518958e86083aca8deb5aa2e7f2a51acd53291d97852479b0ab26ed949b6a45a0e9adcc7b0d1c3c72375e8ea670f7005e341c6daba
+"dotenv@npm:^18.0.0":
+  version: 18.0.0
+  resolution: "dotenv@npm:18.0.0"
+  bin:
+    dotenv: dist/index.cjs
+  checksum: 10/9092cef80bf6b2d2a76e06a21d9f6368307df6da0273bebfe54e2bf6753bfe69be9c994347c6004e8194997aff6f087a5ee043a3be8c420c4955e0a3d03821b5
   languageName: node
   linkType: hard
 
